@@ -104,7 +104,7 @@ export default function Hero({ onSearch, onOpenRegister }) {
           </div>
 
           {/* Right Column Student Visual */}
-          <div className="lg:col-span-5 flex items-end justify-center relative mt-6 lg:mt-0 self-end -mb-6 sm:-mb-10 lg:-mb-14">
+          <div className="lg:col-span-5 flex items-end justify-center relative mt-6 lg:mt-0 self-end -mb-12 sm:-mb-20 lg:-mb-28">
             <div className="relative w-full max-w-md flex items-end justify-center">
               
               {/* Soft Radial Backlight */}
@@ -114,7 +114,7 @@ export default function Hero({ onSearch, onOpenRegister }) {
               <img
                 src="/hero-student.png"
                 alt="Student with blue backpack and notebook"
-                className="w-full max-w-xs sm:max-w-sm lg:max-w-md h-auto object-contain relative z-10 drop-shadow-2xl"
+                className="w-full max-w-xs sm:max-w-sm lg:max-w-md h-auto object-contain relative z-10 drop-shadow-2xl block"
               />
 
             </div>
