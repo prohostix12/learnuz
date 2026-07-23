@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
-import { Search, GraduationCap } from 'lucide-react';
+import React from 'react';
+import { GraduationCap, ArrowUpRight, School, BookOpen, Users, Briefcase } from 'lucide-react';
 import AnimatedHeading from './AnimatedHeading';
 
 export default function Hero({ onSearch, onOpenRegister }) {
-  const [emailQuery, setEmailQuery] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (onSearch) {
-      onSearch(emailQuery);
-    }
-  };
+  const stats = [
+    {
+      id: 1,
+      icon: School,
+      value: '50+',
+      label: 'Partner Universities',
+    },
+    {
+      id: 2,
+      icon: BookOpen,
+      value: '200+',
+      label: 'Programs',
+    },
+    {
+      id: 3,
+      icon: Users,
+      value: '15000+',
+      label: 'Students Enrolled',
+    },
+    {
+      id: 4,
+      icon: Briefcase,
+      value: '95%',
+      label: 'Placement Rate',
+    },
+  ];
 
   return (
     <section id="home" className="px-4 sm:px-6 lg:px-8 pt-2 pb-8 relative z-10">
@@ -44,28 +62,37 @@ export default function Hero({ onSearch, onOpenRegister }) {
 
             {/* Subtext */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-900 font-medium max-w-xl leading-relaxed">
-              Join a new era of education where innovation meets knowledge. Discover expert-led courses, practical skills, and limitless opportunities to achieve your goals.
+              Partnered with India's top UGC-DEB approved universities. Headquartered in Kochi, Kerala, helping students nationwide find and enroll in premium online degrees.
             </p>
 
-            {/* Glass Search Input Box */}
-            <form 
-              onSubmit={handleSubmit}
-              className="w-full max-w-lg glass-search-box p-1.5 sm:p-2 rounded-full flex items-center gap-2 transition-all focus-within:ring-2 focus-within:ring-white"
-            >
-              <input
-                type="text"
-                value={emailQuery}
-                onChange={(e) => setEmailQuery(e.target.value)}
-                placeholder="Type your email here...."
-                className="w-full bg-transparent px-4 sm:px-6 py-2.5 text-sm sm:text-base text-slate-900 placeholder-slate-800 font-medium focus:outline-none"
-              />
+            {/* Hero Interactive Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
               <button
-                type="submit"
-                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 sm:px-8 py-3 rounded-full shadow-lg shadow-purple-600/30 transition-all duration-200 active:scale-95 shrink-0"
+                onClick={() => {
+                  const element = document.querySelector('#courses');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-black font-semibold px-6 sm:px-8 py-3 rounded-full border border-black shadow-lg shadow-purple-600/30 transition-all duration-200 active:scale-95 shrink-0"
               >
-                Search
+                Explore Programs
               </button>
-            </form>
+              <button
+                onClick={() => {
+                  const element = document.querySelector('#universities');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="group flex items-center gap-2 backdrop-blur-md bg-white/20 hover:bg-white/30 text-black font-semibold pl-6 pr-2 py-2 rounded-full border border-black transition-all duration-200 active:scale-95 shrink-0"
+              >
+                <span>Universities</span>
+                <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white group-hover:scale-105 group-hover:rotate-45 transition-all duration-300 shadow-md">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+              </button>
+            </div>
 
             {/* Social Proof Footer */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2">
@@ -119,9 +146,37 @@ export default function Hero({ onSearch, onOpenRegister }) {
 
             </div>
           </div>
-
         </div>
 
+      </div>
+
+      {/* Achievements Card */}
+      <div className="max-w-6xl mx-auto -mt-4 sm:-mt-6 lg:-mt-8 relative z-20 px-4 sm:px-6">
+        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-6 sm:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div 
+                  key={stat.id} 
+                  className={`flex items-center gap-4 px-6 justify-center sm:justify-start ${
+                    index > 0 ? 'lg:border-l lg:border-slate-200' : ''
+                  }`}
+                >
+                  <Icon className="w-8 h-8 text-blue-950 shrink-0" />
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-blue-950 tracking-tight leading-none">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs sm:text-sm font-semibold text-slate-500 mt-1.5 leading-tight">
+                      {stat.label}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

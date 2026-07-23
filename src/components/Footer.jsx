@@ -4,7 +4,7 @@ import { Send, Globe, Shield, Heart, ArrowUpRight } from 'lucide-react';
 
 export default function Footer({ onOpenRegister }) {
   return (
-    <footer className="bg-[#091535] text-slate-300 pt-16 pb-12 relative overflow-hidden border-t border-slate-800">
+    <footer id="footer" className="bg-[#091535] text-slate-300 pt-16 pb-12 relative overflow-hidden border-t border-slate-800">
       
       {/* Background Radial Lights */}
       <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -62,9 +62,10 @@ export default function Footer({ onOpenRegister }) {
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
+              <li><a href="#courses" className="hover:text-blue-400 transition-colors">Programs</a></li>
               <li><a href="#universities" className="hover:text-blue-400 transition-colors">Universities</a></li>
-              <li><a href="#courses" className="hover:text-blue-400 transition-colors">Courses</a></li>
               <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
+              <li><a href="#footer" className="hover:text-blue-400 transition-colors">Contacts</a></li>
             </ul>
           </div>
 

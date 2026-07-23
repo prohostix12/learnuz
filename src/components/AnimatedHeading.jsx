@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 const DEFAULT_HEADINGS = [
   {
     lines: [
-      "FIND YOUR DREAM ",
-      "UNIVERSITY & EXPLORE",
-      "SKILLS FOR SUCCESS"
+      "THE BEST ONLINE",
+      "DEGREE INSTITUTION & ",
+      "CAREER CENTER"
     ],
-    highlight: "SKILLS FOR SUCCESS"
+    highlight: "DEGREE INSTITUTION"
   },
   {
     lines: [

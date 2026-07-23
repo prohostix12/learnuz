@@ -8,9 +8,10 @@ export default function Navbar({ onOpenRegister }) {
 
   const navItems = [
     { name: 'Home', href: '#home' },
+    { name: 'Programs', href: '#courses' },
     { name: 'Universities', href: '#universities' },
-    { name: 'Courses', href: '#courses' },
-    { name: 'About', href: '#about' }
+    { name: 'About', href: '#about' },
+    { name: 'Contacts', href: '#footer' }
   ];
 
   const handleNavClick = (e, item) => {

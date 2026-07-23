@@ -6,7 +6,7 @@ export default function Highlights() {
     {
       id: 1,
       icon: Compass,
-      title: '1,000+ Knowledge Paths',
+      title: '50+ Universities',
       description: 'Gain practical knowledge through curated university courses that lead to real-world career impact.',
       gradient: 'from-blue-500/10 to-indigo-500/10',
       iconBg: 'bg-blue-600 text-white',
