@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Highlights from './components/Highlights';
-import Features from './components/Features';
-import Universities from './components/Universities';
-import PopularSubjects from './components/PopularSubjects';
-import Testimonials from './components/Testimonials';
-import Footer from './components/Footer';
-import RegisterModal from './components/RegisterModal';
+"use client";
 
-export default function App() {
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import Highlights from '../components/Highlights';
+import Features from '../components/Features';
+import Universities from '../components/Universities';
+import PopularSubjects from '../components/PopularSubjects';
+import Testimonials from '../components/Testimonials';
+import Footer from '../components/Footer';
+import RegisterModal from '../components/RegisterModal';
+
+export default function Home() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
