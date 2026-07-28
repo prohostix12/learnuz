@@ -15,7 +15,7 @@ export default function LearnuzLogo({ size = 'medium', layout = 'horizontal', cl
       className={`inline-flex ${layout === 'vertical' ? 'flex-col text-center' : 'items-center'} gap-2.5 select-none group cursor-pointer ${className}`}
     >
       {/* LN Monogram Vector SVG matching uploaded image */}
-      <img src="learnuz logo.png" alt="" className='w-18' />
+      <img src="learnuz logo.png" alt="" className='w-28' />
     </div>
   );
 }

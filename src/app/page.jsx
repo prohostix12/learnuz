@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Highlights from '../components/Highlights';
@@ -10,11 +10,53 @@ import PopularSubjects from '../components/PopularSubjects';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import RegisterModal from '../components/RegisterModal';
+import CourseFinder from '../components/course-finder/CourseFinder';
 
 export default function Home() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isCourseFinderOpen, setIsCourseFinderOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
+  const [wasOpen, setWasOpen] = useState(false);
+
+  const initialTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    // Show popup 5 seconds after mount
+    initialTimeoutRef.current = setTimeout(() => {
+      setIsRegisterOpen(true);
+    }, 5000);
+    return () => {
+      if (initialTimeoutRef.current) {
+        clearTimeout(initialTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // If the modal was opened (manually or automatically), cancel the initial 5s trigger
+    if (isRegisterOpen && initialTimeoutRef.current) {
+      clearTimeout(initialTimeoutRef.current);
+      initialTimeoutRef.current = null;
+    }
+  }, [isRegisterOpen]);
+
+  useEffect(() => {
+    let reopenTimeout;
+    if (isRegisterOpen) {
+      setWasOpen(true);
+    } else if (wasOpen && !isRegisterOpen) {
+      // User closed the modal, reopen it after 30 seconds
+      reopenTimeout = setTimeout(() => {
+        setIsRegisterOpen(true);
+      }, 30000);
+    }
+    return () => {
+      if (reopenTimeout) {
+        clearTimeout(reopenTimeout);
+      }
+    };
+  }, [isRegisterOpen, wasOpen]);
 
   const handleOpenRegister = (course = null) => {
     setSelectedCourse(course);
@@ -32,7 +74,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] relative">
+    <div className="min-h-screen bg-transparent text-[#0f172a] relative">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -43,7 +85,10 @@ export default function Home() {
       )}
 
       {/* Navigation Header */}
-      <Navbar onOpenRegister={() => handleOpenRegister()} />
+      <Navbar 
+        onOpenRegister={() => handleOpenRegister()} 
+        onOpenCourseFinder={() => setIsCourseFinderOpen(true)}
+      />
 
       {/* Main Content Sections */}
       <main>
@@ -51,16 +96,17 @@ export default function Home() {
         <Hero 
           onSearch={handleSearch} 
           onOpenRegister={() => handleOpenRegister()} 
+          onOpenCourseFinder={() => setIsCourseFinderOpen(true)}
         />
 
         {/* 3 Metric Highlight Glass Cards */}
         <Highlights />
 
         {/* Features & Student Highlight Grid */}
-        <Features />
+        {/* <Features /> */}
 
         {/* Accredited Partner Universities */}
-        <Universities />
+        <Universities onOpenRegister={handleOpenRegister} />
 
         {/* Popular Subjects & Courses Grid with Filters */}
         <PopularSubjects 
@@ -83,6 +129,12 @@ export default function Home() {
         isOpen={isRegisterOpen} 
         onClose={() => setIsRegisterOpen(false)} 
         selectedCourse={selectedCourse}
+      />
+
+      {/* Course Finder Recommendation Wizard Modal */}
+      <CourseFinder 
+        isOpen={isCourseFinderOpen} 
+        onClose={() => setIsCourseFinderOpen(false)} 
       />
     </div>
   );

@@ -1,17 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  --color-blue-50: #f0f4fb;
+  --color-blue-100: #dce5f4;
+  --color-blue-200: #bdcee9;
+  --color-blue-300: #92b0db;
+  --color-blue-400: #618cca;
+  --color-blue-500: #3b69b5;
+  --color-blue-600: #1f3f7a; /* Lapis Blue */
+  --color-blue-700: #162c56; /* Darker Lapis Blue */
+  --color-blue-800: #0e1c37;
+  --color-blue-900: #0c1731;
+
+  --color-indigo-50: #f0f8f9;
+  --color-indigo-100: #daf0f3;
+  --color-indigo-200: #b7e0e7;
+  --color-indigo-300: #87c9d5;
+  --color-indigo-400: #50a8b9;
+  --color-indigo-500: #2c8a9b;
+  --color-indigo-600: #117686; /* Midpoint Blue-Green */
+  --color-indigo-700: #0d5d6a;
+  --color-indigo-800: #09454f;
+  --color-indigo-900: #063138;
+
+  --color-purple-50: #f0fbf9;
+  --color-purple-100: #cef4ed;
+  --color-purple-200: #9dead9;
+  --color-purple-300: #5fd9c1;
+  --color-purple-400: #28bfa5;
+  --color-purple-500: #04cc9a;
+  --color-purple-600: #03ae92; /* Green Blue */
+  --color-purple-700: #028e77;
+  --color-purple-800: #016f5d;
+  --color-purple-900: #014c40;
+
+  --color-slate-900: #232323; /* Metallic Black */
+  --color-slate-950: #1a1a1a;
+}
+
 @layer base {
   :root {
-    --primary-blue: #2563eb;
-    --primary-blue-dark: #1d4ed8;
-    --purple-accent: #8b5cf6;
-    --navy-dark: #091535;
+    --primary-blue: #1f3f7a;
+    --primary-blue-dark: #162c56;
+    --purple-accent: #03ae92;
+    --navy-dark: #232323;
   }
 
   body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: #ffffff;
-    color: #0f172a;
+    color: #232323;
     overflow-x: hidden;
   }
 
@@ -22,7 +60,7 @@
 
 /* Rich Vibrant Sky Blue to Electric Purple Hero Background Gradient */
 .hero-wrapper-bg {
-  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 28%, #6366f1 58%, #7c3aed 82%, #9333ea 100%);
+  background: linear-gradient(135deg, #1f3f7a 0%, #162c56 30%, #117686 65%, #03ae92 100%);
   position: relative;
 }
 
@@ -36,8 +74,8 @@
 .hero-grid-dark {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(31, 63, 122, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 63, 122, 0.08) 1px, transparent 1px);
 }
 
 /* Glassmorphism Styles matching uploaded UI mockup */
@@ -50,9 +88,9 @@
 }
 
 .glass-pill-active {
-  background: #2563eb;
+  background: #1f3f7a;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 14px rgba(31, 63, 122, 0.4);
 }
 
 .glass-search-box {
@@ -72,22 +110,49 @@
 
 /* Smooth Curved Gradient Overlay behind Student */
 .student-glow-aura {
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(192, 132, 252, 0.4) 50%, rgba(255, 255, 255, 0) 75%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(3, 174, 146, 0.4) 50%, rgba(255, 255, 255, 0) 75%);
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.08);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(31, 63, 122, 0.08);
 }
 
 .glass-card-blue {
-  background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.7) 100%);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(191, 219, 254, 0.9);
-  box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.12);
+  background: linear-gradient(135deg, rgba(240, 244, 251, 0.3) 0%, rgba(220, 229, 244, 0.25) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(189, 206, 233, 0.3);
+  box-shadow: 0 12px 30px -8px rgba(31, 63, 122, 0.12);
+}
+
+/* Override literal color utilities to map to our new Metallic Black theme color */
+.text-\[\#091535\], .text-\[\#0F172A\], .text-\[\#0f172a\] {
+  color: #232323 !important;
+}
+
+.bg-\[\#091535\] {
+  background-color: #232323 !important;
+}
+
+.from-\[\#091535\] {
+  --tw-gradient-from: #232323 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(35, 35, 35, 0)) !important;
+}
+
+.to-\[\#0c1c46\], .to-\[\#0d1e4e\], .to-\[\#050e26\], .to-indigo-950 {
+  --tw-gradient-to: #1a1a1a !important;
+}
+
+.via-\[\#0b1b46\], .via-\[\#0d1e4c\] {
+  --tw-gradient-via: #202020 !important;
+}
+
+::selection {
+  background-color: #1f3f7a !important;
+  color: #ffffff !important;
 }
 
 /* Letter Animation Keyframes */
@@ -123,4 +188,24 @@
 
 .animate-spin-slow {
   animation: spinSlow 8s linear infinite;
+}
+
+/* Custom Universities Page Typography and Styles */
+.universities-page-wrap {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.universities-page-wrap h1,
+.universities-page-wrap h2,
+.universities-page-wrap h3,
+.universities-page-wrap h4,
+.universities-page-wrap .font-poppins-extrabold {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.universities-page-wrap button,
+.universities-page-wrap .font-poppins-medium {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 500 !important;
 }

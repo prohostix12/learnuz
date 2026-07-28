@@ -108,7 +108,7 @@ export default function AnimatedHeading({
                 key={`${linePrefix}-c-${globalCharIdx}-${headingIndex}`}
                 className={`inline-block animate-letter-pop transition-all duration-150 transform hover:scale-110 ${
                   inHighlight 
-                    ? 'bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 bg-clip-text text-transparent font-black drop-shadow-sm' 
+                    ? 'bg-blue-600 bg-clip-text text-transparent font-black drop-shadow-sm' 
                     : ''
                 }`}
               >
@@ -159,7 +159,7 @@ export default function AnimatedHeading({
       </h1>
 
       {/* Subtle replay trigger button */}
-      <button 
+      {/* <button 
         onClick={handleReplay}
         title="Re-trigger Letter Animation"
         className="absolute -top-3 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/60 text-slate-700 border border-white/80 hover:bg-white shadow-sm flex items-center gap-1 cursor-pointer"
@@ -168,7 +168,7 @@ export default function AnimatedHeading({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
         <span>Replay</span>
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, MessageSquare, Quote, Star, CheckCircle } from 'lucide-react';
+import { ArrowUpRight, MessageSquare, Quote, Star } from 'lucide-react';
 
 export default function Testimonials({ onOpenRegister }) {
   const testimonials = [
@@ -32,16 +32,8 @@ export default function Testimonials({ onOpenRegister }) {
     }
   ];
 
-  const photoGrid = [
-    'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=400&q=80'
-  ];
-
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 bg-white/30 backdrop-blur-md relative overflow-hidden">
       
       {/* Background Soft Glow */}
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-blue-100/60 rounded-full blur-3xl pointer-events-none"></div>
@@ -63,6 +55,7 @@ export default function Testimonials({ onOpenRegister }) {
             Over 100K Learners Worldwide Trust Learnuz To Achieve Their Goals. Join A Growing Community Where Education Meets Innovation, And Success Becomes A Shared Journey.
           </p>
 
+          {/* 
           <div className="mt-8 flex justify-center">
             <button
               onClick={onOpenRegister}
@@ -74,6 +67,7 @@ export default function Testimonials({ onOpenRegister }) {
               </div>
             </button>
           </div>
+          */}
         </div>
 
         {/* Testimonials Cards Grid */}
@@ -115,27 +109,6 @@ export default function Testimonials({ onOpenRegister }) {
           ))}
         </div>
 
-        {/* Happy Student Photo Mosaic */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-          {photoGrid.map((url, index) => (
-            <div
-              key={index}
-              className="h-44 rounded-2xl overflow-hidden group shadow-md relative"
-            >
-              <img
-                src={url}
-                alt="Happy Student"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                <div className="text-white text-xs font-bold flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Verified Alumni</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
 
       </div>
     </section>

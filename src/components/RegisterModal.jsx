@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, CheckCircle, GraduationCap, ArrowRight, Shield } from 'lucide-react';
 import LearnuzLogo from './LearnuzLogo';
 
 export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -13,11 +15,55 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
 
   const [submitted, setSubmitted] = useState(false);
 
-  if (!isOpen) return null;
+  // Set mounted state on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const handleSubmit = (e) => {
+  // Synchronize program when selectedCourse changes
+  useEffect(() => {
+    if (selectedCourse) {
+      setFormData(prev => ({ ...prev, program: selectedCourse.title }));
+    } else {
+      setFormData(prev => ({ ...prev, program: 'Full-Stack Software Engineering' }));
+    }
+  }, [selectedCourse]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  if (!isOpen || !mounted) return null;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/registrations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const errorData = await res.json();
+        console.error('Failed to submit application:', errorData.error);
+        alert(errorData.error || 'Failed to submit application. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      alert('Network error. Please try again.');
+    }
   };
 
   const handleReset = () => {
@@ -25,14 +71,14 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
     onClose();
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
+  const modalContent = (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
       <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors z-10"
+          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors z-10 cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -48,7 +94,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
             </p>
             <button
               onClick={handleReset}
-              className="mt-6 w-full py-3 rounded-2xl bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/25 hover:bg-blue-700 transition-all"
+              className="mt-6 w-full py-3 rounded-2xl bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/25 hover:bg-blue-700 transition-all cursor-pointer"
             >
               Done
             </button>
@@ -141,7 +187,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-blue-500/30 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-blue-500/30 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Submit Application</span>
                   <ArrowRight className="w-4 h-4" />
@@ -159,4 +205,6 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { GraduationCap, ArrowUpRight, School, BookOpen, Users, Briefcase } from 'lucide-react';
 import AnimatedHeading from './AnimatedHeading';
 
-export default function Hero({ onSearch, onOpenRegister }) {
+export default function Hero({ onSearch, onOpenRegister, onOpenCourseFinder }) {
   const stats = [
     {
       id: 1,
@@ -94,7 +94,7 @@ export default function Hero({ onSearch, onOpenRegister }) {
               </button>
             </div>
 
-            {/* Social Proof Footer */}
+            {/* Social Proof Footer
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2">
               <div className="flex items-center -space-x-2.5">
                 <img
@@ -127,6 +127,7 @@ export default function Hero({ onSearch, onOpenRegister }) {
                 </button>
               </div>
             </div>
+            */}
 
           </div>
 
@@ -143,6 +144,20 @@ export default function Hero({ onSearch, onOpenRegister }) {
                 alt="Student with blue backpack and notebook"
                 className="w-full max-w-xs sm:max-w-sm lg:max-w-md h-auto object-contain relative z-10 drop-shadow-2xl block"
               />
+
+              {/* Floating Find Your Course CTA Card */}
+              <div 
+                onClick={onOpenCourseFinder}
+                className="absolute bottom-16 -right-4 sm:-right-8 lg:-right-12 z-20 backdrop-blur-md bg-white/65 hover:bg-white border border-white/60 hover:border-white/90 p-4 rounded-2xl shadow-xl hover:shadow-2xl shadow-purple-650/10 hover:shadow-purple-650/25 flex items-center gap-3.5 hover:scale-105 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer group opacity-85 hover:opacity-100"
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-550/10 group-hover:shadow-indigo-550/20 group-hover:rotate-12 transition-all duration-300 opacity-75 group-hover:opacity-100">
+                  <GraduationCap className="w-5 h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <span className="block text-sm font-bold text-slate-900/80 group-hover:text-slate-900 leading-none transition-colors duration-300">Find Your Course</span>
+                  <span className="text-[10px] text-indigo-600/80 group-hover:text-indigo-600 font-bold uppercase tracking-wider mt-1 block transition-colors duration-300">Match in 1 minute</span>
+                </div>
+              </div>
 
             </div>
           </div>

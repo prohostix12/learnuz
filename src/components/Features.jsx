@@ -38,7 +38,7 @@ export default function Features() {
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-24 bg-white relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 bg-white/30 backdrop-blur-md relative overflow-hidden">
       
       {/* Background Decorative Circles */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl -translate-y-1/2 pointer-events-none"></div>

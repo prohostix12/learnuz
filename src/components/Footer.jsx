@@ -12,25 +12,18 @@ export default function Footer({ onOpenRegister }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Pre-Footer Callout Box */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 sm:p-12 mb-16 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 text-white">
-          <div>
+        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 sm:p-12 mb-16 shadow-2xl text-center text-white">
+          <div className="max-w-2xl mx-auto py-2">
             <span className="bg-white/20 text-white text-xs font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider">
               Start Learning Today
             </span>
             <h3 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
               Ready to Advance Your University Degree?
             </h3>
-            <p className="text-blue-100 text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-blue-100 text-sm sm:text-base mt-3 leading-relaxed">
               Join over 100,000 students enrolled in world-class university courses and accredited degree pathways through Learnuz.
             </p>
           </div>
-          <button
-            onClick={onOpenRegister}
-            className="shrink-0 bg-white text-blue-700 font-extrabold px-8 py-4 rounded-full shadow-xl hover:bg-blue-50 transition-all hover:scale-105 flex items-center gap-2"
-          >
-            <span>Get Started Now</span>
-            <ArrowUpRight className="w-5 h-5 text-blue-700" />
-          </button>
         </div>
 
         {/* 4-Column Footer Grid */}
@@ -61,11 +54,11 @@ export default function Footer({ onOpenRegister }) {
               Navigation
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
-              <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
-              <li><a href="#courses" className="hover:text-blue-400 transition-colors">Programs</a></li>
-              <li><a href="#universities" className="hover:text-blue-400 transition-colors">Universities</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
-              <li><a href="#footer" className="hover:text-blue-400 transition-colors">Contacts</a></li>
+              <li><a href="/#home" className="hover:text-blue-400 transition-colors">Home</a></li>
+              <li><a href="/programs" className="hover:text-blue-400 transition-colors">Programs</a></li>
+              <li><a href="/#universities" className="hover:text-blue-400 transition-colors">Universities</a></li>
+              <li><a href="/about" className="hover:text-blue-400 transition-colors">About</a></li>
+              <li><a href="/contact" className="hover:text-blue-400 transition-colors">Contacts</a></li>
             </ul>
           </div>
 
@@ -91,6 +84,7 @@ export default function Footer({ onOpenRegister }) {
               Subscribe for university updates, scholarship alerts, and new course releases.
             </p>
             <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
+              {/* 
               <div className="relative">
                 <input
                   type="email"
@@ -104,6 +98,7 @@ export default function Footer({ onOpenRegister }) {
                   <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
+              */}
             </form>
           </div>
 
@@ -118,6 +113,7 @@ export default function Footer({ onOpenRegister }) {
             <a href="#" className="hover:text-slate-400">Privacy Policy</a>
             <a href="#" className="hover:text-slate-400">Terms of Service</a>
             <a href="#" className="hover:text-slate-400">Academic Code</a>
+            <a href="/admin/login" className="hover:text-blue-400 font-semibold text-blue-400/80 transition-colors">Admin Login</a>
           </div>
         </div>
 
