@@ -1266,6 +1266,12 @@ export default function AdminDashboard() {
                     <option>Commerce</option>
                     <option>Management</option>
                     <option>Design</option>
+                    <option>Engineering</option>
+                    <option>Arts & Humanities</option>
+                    <option>Science</option>
+                    <option>Law</option>
+                    <option>Medicine</option>
+                    <option>Education</option>
                   </select>
                 </div>
                 <div>

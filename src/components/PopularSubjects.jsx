@@ -25,7 +25,13 @@ export default function PopularSubjects({ onSelectCourse }) {
     'Postgraduate',
     'Computer Science',
     'Commerce',
-    'Management'
+    'Management',
+    'Engineering',
+    'Arts & Humanities',
+    'Science',
+    'Law',
+    'Medicine',
+    'Education'
   ];
 
   useEffect(() => {

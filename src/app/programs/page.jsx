@@ -167,7 +167,7 @@ function ProgramsContent() {
 
           {/* Filter Pills Capsule */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            {['All', 'Undergraduate', 'Postgraduate', 'Computer Science', 'Commerce', 'Management'].map((cat) => {
+            {['All', 'Undergraduate', 'Postgraduate', 'Computer Science', 'Commerce', 'Management', 'Engineering', 'Arts & Humanities', 'Science', 'Law', 'Medicine', 'Education'].map((cat) => {
               const isActive = activeCategory === cat;
               return (
                 <button
