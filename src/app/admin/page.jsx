@@ -31,6 +31,16 @@ import {
   ChevronRight
 } from 'lucide-react';
 
+const safeNumber = (val) => {
+  if (val === undefined || val === null || isNaN(val) || val === '') return '';
+  return val;
+};
+
+const parseNum = (val) => {
+  const p = parseInt(val, 10);
+  return isNaN(p) ? '' : p;
+};
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -74,7 +84,8 @@ export default function AdminDashboard() {
     type: 'Private',
     featured: false,
     coverImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop',
-    logo: ''
+    logo: '',
+    description: ''
   });
 
   const [progForm, setProgForm] = useState({
@@ -90,7 +101,8 @@ export default function AdminDashboard() {
     featured: false,
     category: 'Computer Science',
     syllabus: '',
-    careers: ''
+    careers: '',
+    description: ''
   });
 
   // Fetch all dashboard data
@@ -303,7 +315,8 @@ export default function AdminDashboard() {
       type: uni.type,
       featured: uni.featured,
       coverImage: uni.coverImage,
-      logo: uni.logo || ''
+      logo: uni.logo || '',
+      description: uni.description || ''
     });
     setUniModalOpen(true);
   };
@@ -324,7 +337,8 @@ export default function AdminDashboard() {
       featured: prog.featured,
       category: prog.category,
       syllabus: prog.syllabus ? prog.syllabus.join(', ') : '',
-      careers: prog.careers ? prog.careers.join(', ') : ''
+      careers: prog.careers ? prog.careers.join(', ') : '',
+      description: prog.description || ''
     });
     setProgModalOpen(true);
   };
@@ -345,7 +359,8 @@ export default function AdminDashboard() {
       type: 'Private',
       featured: false,
       coverImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop',
-      logo: ''
+      logo: '',
+      description: ''
     });
   };
 
@@ -363,7 +378,8 @@ export default function AdminDashboard() {
       featured: false,
       category: 'Computer Science',
       syllabus: '',
-      careers: ''
+      careers: '',
+      description: ''
     });
   };
 
@@ -1004,8 +1020,8 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Established Year</label>
                   <input
                     type="number" required
-                    value={uniForm.established}
-                    onChange={(e) => setUniForm({ ...uniForm, established: parseInt(e.target.value, 10) })}
+                    value={safeNumber(uniForm.established)}
+                    onChange={(e) => setUniForm({ ...uniForm, established: parseNum(e.target.value) })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
                     placeholder="1980"
                   />
@@ -1053,8 +1069,8 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Min Semester Fee (₹)</label>
                   <input
                     type="number" required
-                    value={uniForm.minFee}
-                    onChange={(e) => setUniForm({ ...uniForm, minFee: parseInt(e.target.value, 10) })}
+                    value={safeNumber(uniForm.minFee)}
+                    onChange={(e) => setUniForm({ ...uniForm, minFee: parseNum(e.target.value) })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
                   />
                 </div>
@@ -1062,8 +1078,8 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Max Semester Fee (₹)</label>
                   <input
                     type="number" required
-                    value={uniForm.maxFee}
-                    onChange={(e) => setUniForm({ ...uniForm, maxFee: parseInt(e.target.value, 10) })}
+                    value={safeNumber(uniForm.maxFee)}
+                    onChange={(e) => setUniForm({ ...uniForm, maxFee: parseNum(e.target.value) })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
                   />
                 </div>
@@ -1084,8 +1100,8 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Syllabus Programs Count</label>
                   <input
                     type="number" required
-                    value={uniForm.programsCount}
-                    onChange={(e) => setUniForm({ ...uniForm, programsCount: parseInt(e.target.value, 10) })}
+                    value={safeNumber(uniForm.programsCount)}
+                    onChange={(e) => setUniForm({ ...uniForm, programsCount: parseNum(e.target.value) })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
                   />
                 </div>
@@ -1108,6 +1124,17 @@ export default function AdminDashboard() {
                   value={uniForm.coverImage}
                   onChange={(e) => setUniForm({ ...uniForm, coverImage: e.target.value })}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">University Description</label>
+                <textarea
+                  value={uniForm.description || ''}
+                  onChange={(e) => setUniForm({ ...uniForm, description: e.target.value })}
+                  rows="3"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
+                  placeholder="Describe the university, its campus, and major offerings..."
                 />
               </div>
 
@@ -1294,6 +1321,17 @@ export default function AdminDashboard() {
                     placeholder="UGC-DEB, NAAC A+"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Program Description</label>
+                <textarea
+                  value={progForm.description || ''}
+                  onChange={(e) => setProgForm({ ...progForm, description: e.target.value })}
+                  rows="3"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
+                  placeholder="Provide a detailed description of the program, target audience, and key learning outcomes..."
+                />
               </div>
 
               <div>

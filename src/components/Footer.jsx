@@ -23,6 +23,22 @@ export default function Footer({ onOpenRegister }) {
             <p className="text-blue-100 text-sm sm:text-base mt-3 leading-relaxed">
               Join over 100,000 students enrolled in world-class university courses and accredited degree pathways through Learnuz.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+              <a
+                href="/universities"
+                className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white text-indigo-700 hover:bg-slate-100 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-98 cursor-pointer"
+              >
+                <span>Explore Universities</span>
+                <ArrowUpRight className="w-4 h-4 text-indigo-600" />
+              </a>
+              <a
+                href="/programs"
+                className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-transparent border border-white/30 hover:border-white text-white hover:bg-white/10 font-bold text-sm transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-98 cursor-pointer"
+              >
+                <span>Explore Programs</span>
+                <ArrowUpRight className="w-4 h-4 text-white/80" />
+              </a>
+            </div>
           </div>
         </div>
 

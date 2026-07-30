@@ -78,6 +78,10 @@ const UniversitySchema = new mongoose.Schema({
   logo: {
     type: String,
     default: '',
+  },
+  description: {
+    type: String,
+    default: '',
   }
 }, { timestamps: true });
 

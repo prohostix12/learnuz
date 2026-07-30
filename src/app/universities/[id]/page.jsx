@@ -158,7 +158,8 @@ export default function UniversityDetailPage({ params }) {
     feeRange,
     type,
     coverImage,
-    logo
+    logo,
+    description
   } = university;
 
   return (
@@ -306,6 +307,15 @@ export default function UniversityDetailPage({ params }) {
             
             {/* Left Column: Programs Catalog */}
             <div className="lg:col-span-8 space-y-8">
+
+              {description && (
+                <div className="bg-white/40 backdrop-blur-md border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-sm space-y-3">
+                  <h2 className="text-xl font-black text-[#091535]">About {name}</h2>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+              )}
               
               <div className="bg-white/40 backdrop-blur-md border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
                 

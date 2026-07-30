@@ -46,10 +46,10 @@ export default function Home() {
     if (isRegisterOpen) {
       setWasOpen(true);
     } else if (wasOpen && !isRegisterOpen) {
-      // User closed the modal, reopen it after 30 seconds
+      // User closed the modal, reopen it after 1 minute
       reopenTimeout = setTimeout(() => {
         setIsRegisterOpen(true);
-      }, 30000);
+      }, 60000);
     }
     return () => {
       if (reopenTimeout) {

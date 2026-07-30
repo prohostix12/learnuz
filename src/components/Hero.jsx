@@ -67,31 +67,21 @@ export default function Hero({ onSearch, onOpenRegister, onOpenCourseFinder }) {
 
             {/* Hero Interactive Action Buttons */}
             <div className="flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => {
-                  const element = document.querySelector('#courses');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-black font-semibold px-6 sm:px-8 py-3 rounded-full border border-black shadow-lg shadow-purple-600/30 transition-all duration-200 active:scale-95 shrink-0"
+              <a
+                href="/programs"
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-black font-semibold px-6 sm:px-8 py-3 rounded-full border border-black shadow-lg shadow-purple-600/30 transition-all duration-200 active:scale-95 shrink-0 flex items-center justify-center cursor-pointer"
               >
                 Explore Programs
-              </button>
-              <button
-                onClick={() => {
-                  const element = document.querySelector('#universities');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="group flex items-center gap-2 backdrop-blur-md bg-white/20 hover:bg-white/30 text-black font-semibold pl-6 pr-2 py-2 rounded-full border border-black transition-all duration-200 active:scale-95 shrink-0"
+              </a>
+              <a
+                href="/universities"
+                className="group flex items-center gap-2 backdrop-blur-md bg-white/20 hover:bg-white/30 text-black font-semibold pl-6 pr-2 py-2 rounded-full border border-black transition-all duration-200 active:scale-95 shrink-0 cursor-pointer"
               >
                 <span>Universities</span>
                 <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white group-hover:scale-105 group-hover:rotate-45 transition-all duration-300 shadow-md">
                   <ArrowUpRight className="w-4 h-4" />
                 </div>
-              </button>
+              </a>
             </div>
 
             {/* Social Proof Footer

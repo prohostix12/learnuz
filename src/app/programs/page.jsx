@@ -224,9 +224,15 @@ function ProgramsContent() {
                   </div>
 
                   {/* Course Title */}
-                  <h3 className="text-2xl font-bold text-[#091535] leading-snug tracking-tight mb-5 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-2xl font-bold text-[#091535] leading-snug tracking-tight mb-3 group-hover:text-indigo-600 transition-colors">
                     {program.title}
                   </h3>
+
+                  {program.description && (
+                    <p className="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed">
+                      {program.description}
+                    </p>
+                  )}
 
                   {/* University Box */}
                   <div className="bg-slate-50/70 border border-slate-100/80 rounded-2xl p-3.5 flex items-center justify-between mb-5">
@@ -335,6 +341,12 @@ function ProgramsContent() {
                   <p className="text-xs text-slate-500 mt-1">{activeDetailProgram.university} • UGC-DEB Accredited</p>
                 </div>
               </div>
+
+              {activeDetailProgram.description && (
+                <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 border border-slate-100 p-3.5 rounded-2xl">
+                  {activeDetailProgram.description}
+                </p>
+              )}
 
               {/* Syllabus Breakdown */}
               <div className="space-y-3">

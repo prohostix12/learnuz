@@ -2,15 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X, CheckCircle, GraduationCap, ArrowRight, Shield } from 'lucide-react';
 import LearnuzLogo from './LearnuzLogo';
+import { initialPrograms } from '../data/programs';
+
+const levelMapping = {
+  'Bachelor Degree': 'Undergraduate',
+  'Master Degree': 'Postgraduate',
+  'Professional Cert': 'Certificate',
+  'Executive Diploma': 'Diploma'
+};
+
+const reverseLevelMapping = {
+  'Undergraduate': 'Bachelor Degree',
+  'Postgraduate': 'Master Degree',
+  'Certificate': 'Professional Cert',
+  'Diploma': 'Executive Diploma'
+};
 
 export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
   const [mounted, setMounted] = useState(false);
+  const [programs, setPrograms] = useState(initialPrograms || []);
+  
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
-    program: selectedCourse ? selectedCourse.title : 'Full-Stack Software Engineering',
-    degreeLevel: 'Bachelor Degree'
+    program: selectedCourse ? selectedCourse.title : (initialPrograms.filter(p => p.level === 'Undergraduate')[0]?.title || ''),
+    degreeLevel: selectedCourse ? (reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree') : 'Bachelor Degree'
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -20,14 +37,56 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
     setMounted(true);
   }, []);
 
+  // Fetch programs from API
+  useEffect(() => {
+    if (isOpen) {
+      const fetchPrograms = async () => {
+        try {
+          const res = await fetch('/api/programs');
+          if (res.ok) {
+            const data = await res.json();
+            setPrograms(data);
+          }
+        } catch (error) {
+          console.error('Error fetching programs:', error);
+        }
+      };
+      fetchPrograms();
+    }
+  }, [isOpen]);
+
   // Synchronize program when selectedCourse changes
   useEffect(() => {
     if (selectedCourse) {
-      setFormData(prev => ({ ...prev, program: selectedCourse.title }));
+      const mappedLevel = reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree';
+      setFormData(prev => ({
+        ...prev,
+        degreeLevel: mappedLevel,
+        program: selectedCourse.title
+      }));
     } else {
-      setFormData(prev => ({ ...prev, program: 'Full-Stack Software Engineering' }));
+      const defaultProgram = initialPrograms.filter(p => p.level === 'Undergraduate')[0]?.title || '';
+      setFormData(prev => ({
+        ...prev,
+        degreeLevel: 'Bachelor Degree',
+        program: defaultProgram
+      }));
     }
   }, [selectedCourse]);
+
+  const handleDegreeLevelChange = (e) => {
+    const newDegreeLevel = e.target.value;
+    const targetLevel = levelMapping[newDegreeLevel];
+    const matchingProgs = programs.filter(p => p.level === targetLevel);
+    const newProgram = matchingProgs.length > 0 ? matchingProgs[0].title : '';
+    setFormData(prev => ({
+      ...prev,
+      degreeLevel: newDegreeLevel,
+      program: newProgram
+    }));
+  };
+
+  const filteredPrograms = programs.filter(prog => prog.level === levelMapping[formData.degreeLevel]);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -150,7 +209,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                   </label>
                   <select
                     value={formData.degreeLevel}
-                    onChange={(e) => setFormData({ ...formData, degreeLevel: e.target.value })}
+                    onChange={handleDegreeLevelChange}
                     className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
                   >
                     <option>Bachelor Degree</option>
@@ -178,9 +237,23 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Selected Program
                 </label>
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs font-bold text-blue-800">
-                  <GraduationCap className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span className="truncate">{formData.program}</span>
+                <div className="relative">
+                  <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 z-10 pointer-events-none" />
+                  <select
+                    value={formData.program}
+                    onChange={(e) => setFormData({ ...formData, program: e.target.value })}
+                    className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                  >
+                    {filteredPrograms.length > 0 ? (
+                      filteredPrograms.map((prog) => (
+                        <option key={prog._id || prog.code || prog.title} value={prog.title}>
+                          {prog.title} {prog.university ? `(${prog.university})` : ''}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">No programs available for this level</option>
+                    )}
+                  </select>
                 </div>
               </div>
 

@@ -36,6 +36,7 @@ export default function UniversityCard({ university, onSelect, programs = [] }) 
     feeRange,
     coverImage,
     logo,
+    description,
   } = university;
 
   // For Aligarh, we do not append shortName to match the mockup
@@ -108,6 +109,13 @@ export default function UniversityCard({ university, onSelect, programs = [] }) 
           </div>
         </div>
       </div>
+
+      {/* Description Snippet */}
+      {description && (
+        <p className="text-[11px] sm:text-xs text-slate-505 text-slate-500 mt-2.5 line-clamp-2 leading-relaxed">
+          {description}
+        </p>
+      )}
 
       {/* Middle section: Statistics Grid with Vertical Dividers */}
       <div className="grid grid-cols-4 divide-x divide-slate-100 py-3.5 my-4 border-y border-slate-100">
