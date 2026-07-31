@@ -622,7 +622,7 @@ export default function AdminDashboard() {
                             <span className="font-bold text-slate-800 text-sm">{reg.fullName}</span>
                             <span className="text-[10px] text-slate-400 font-semibold">{new Date(reg.createdAt).toLocaleDateString()}</span>
                           </div>
-                          <p className="text-[11px] font-bold text-slate-500 mt-0.5">{reg.degreeLevel} in {reg.program}</p>
+                          <p className="text-[11px] font-bold text-slate-500 mt-0.5">{reg.degreeLevel} in {reg.program} {reg.university ? `(${reg.university})` : ''}</p>
                           <div className="flex items-center gap-3 text-[10px] text-slate-400 mt-1 font-semibold">
                             <span>Phone: {reg.phone || 'N/A'}</span>
                             <span>•</span>
@@ -939,7 +939,7 @@ export default function AdminDashboard() {
                             <span className="text-[10px] text-slate-400 font-semibold">{new Date(reg.createdAt).toLocaleDateString()}</span>
                           </div>
                           <p className="text-xs font-bold text-slate-700 mt-1 bg-slate-50 border border-slate-100 p-2 rounded-xl">
-                            <span className="text-indigo-600">{reg.degreeLevel}</span>: {reg.program}
+                            <span className="text-indigo-600">{reg.degreeLevel}</span>: {reg.program} {reg.university ? `(${reg.university})` : ''}
                           </p>
                           <div className="flex flex-col gap-1 text-[11px] text-slate-400 mt-2 font-semibold">
                             <span className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-slate-300" /> {reg.email}</span>

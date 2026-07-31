@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LearnuzLogo({ size = 'medium', layout = 'horizontal', className = '', onClick }) {
+export default function LearnuzLogo({ size = 'medium', layout = 'horizontal', className = '',isFooter=false, onClick }) {
   const sizeMap = {
     small: { height: 32, textClass: 'text-xl' },
     medium: { height: 42, textClass: 'text-2xl' },
@@ -15,7 +15,11 @@ export default function LearnuzLogo({ size = 'medium', layout = 'horizontal', cl
       className={`inline-flex ${layout === 'vertical' ? 'flex-col text-center' : 'items-center'} gap-2.5 select-none group cursor-pointer ${className}`}
     >
       {/* LN Monogram Vector SVG matching uploaded image */}
-      <img src="learnuz logo.png" alt="" className='w-28' />
+      {isFooter ? (
+        <img src="/logo footer.png" alt="Learnuz Logo" className='w-28' />
+      ) : (
+        <img src="/learnuz logo.png" alt="Learnuz Logo" className='w-28' />
+      )}
     </div>
   );
 }

@@ -228,7 +228,7 @@ export default function CourseFinderModal({ isOpen, onClose }: CourseFinderModal
         )}
 
         {/* Scrollable Body Content */}
-        <div className="p-6 sm:p-8 overflow-y-auto flex-1">
+        <div className="p-6 sm:p-8 overflow-y-auto flex-1" data-lenis-prevent>
           {currentStep <= 5 && (
             <div className="mb-6 shrink-0">
               <ProgressBar currentStep={currentStep} totalSteps={5} />

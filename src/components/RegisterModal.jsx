@@ -27,7 +27,8 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
     email: '',
     phone: '',
     program: selectedCourse ? selectedCourse.title : (initialPrograms.filter(p => p.level === 'Undergraduate')[0]?.title || ''),
-    degreeLevel: selectedCourse ? (reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree') : 'Bachelor Degree'
+    degreeLevel: selectedCourse ? (reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree') : 'Bachelor Degree',
+    university: selectedCourse ? selectedCourse.university : 'All Universities'
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -62,6 +63,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
       setFormData(prev => ({
         ...prev,
         degreeLevel: mappedLevel,
+        university: selectedCourse.university,
         program: selectedCourse.title
       }));
     } else {
@@ -69,6 +71,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
       setFormData(prev => ({
         ...prev,
         degreeLevel: 'Bachelor Degree',
+        university: 'All Universities',
         program: defaultProgram
       }));
     }
@@ -77,7 +80,11 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
   const handleDegreeLevelChange = (e) => {
     const newDegreeLevel = e.target.value;
     const targetLevel = levelMapping[newDegreeLevel];
-    const matchingProgs = programs.filter(p => p.level === targetLevel);
+    const matchingProgs = programs.filter(p => {
+      const matchesLevel = p.level === targetLevel;
+      const matchesUniversity = formData.university === 'All Universities' || p.university === formData.university;
+      return matchesLevel && matchesUniversity;
+    });
     const newProgram = matchingProgs.length > 0 ? matchingProgs[0].title : '';
     setFormData(prev => ({
       ...prev,
@@ -86,7 +93,29 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
     }));
   };
 
-  const filteredPrograms = programs.filter(prog => prog.level === levelMapping[formData.degreeLevel]);
+  const handleUniversityChange = (e) => {
+    const newUniversity = e.target.value;
+    const targetLevel = levelMapping[formData.degreeLevel];
+    const matchingProgs = programs.filter(p => {
+      const matchesLevel = p.level === targetLevel;
+      const matchesUniversity = newUniversity === 'All Universities' || p.university === newUniversity;
+      return matchesLevel && matchesUniversity;
+    });
+    const newProgram = matchingProgs.length > 0 ? matchingProgs[0].title : '';
+    setFormData(prev => ({
+      ...prev,
+      university: newUniversity,
+      program: newProgram
+    }));
+  };
+
+  const filteredPrograms = programs.filter(prog => {
+    const matchesLevel = prog.level === levelMapping[formData.degreeLevel];
+    const matchesUniversity = formData.university === 'All Universities' || prog.university === formData.university;
+    return matchesLevel && matchesUniversity;
+  });
+
+  const uniqueUniversities = Array.from(new Set(programs.map(p => p.university))).filter(Boolean).sort();
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -132,7 +161,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
 
   const modalContent = (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative">
+      <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative max-h-[90vh] overflow-y-auto" data-lenis-prevent>
         
         {/* Close Button */}
         <button
@@ -188,35 +217,19 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="alex@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                />
-              </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                    Degree Level
+                    Email Address
                   </label>
-                  <select
-                    value={formData.degreeLevel}
-                    onChange={handleDegreeLevelChange}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
-                  >
-                    <option>Bachelor Degree</option>
-                    <option>Master Degree</option>
-                    <option>Professional Cert</option>
-                    <option>Executive Diploma</option>
-                  </select>
+                  <input
+                    type="email"
+                    required
+                    placeholder="alex@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  />
                 </div>
 
                 <div>
@@ -233,6 +246,44 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                 </div>
               </div>
 
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    Degree Level
+                  </label>
+                  <select
+                    disabled={!!selectedCourse}
+                    value={formData.degreeLevel}
+                    onChange={handleDegreeLevelChange}
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"
+                  >
+                    <option>Bachelor Degree</option>
+                    <option>Master Degree</option>
+                    <option>Professional Cert</option>
+                    <option>Executive Diploma</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    University
+                  </label>
+                  <select
+                    disabled={!!selectedCourse}
+                    value={formData.university}
+                    onChange={handleUniversityChange}
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"
+                  >
+                    <option value="All Universities">All Universities</option>
+                    {uniqueUniversities.map((uni) => (
+                      <option key={uni} value={uni}>
+                        {uni}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Selected Program
@@ -240,9 +291,10 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 z-10 pointer-events-none" />
                   <select
+                    disabled={!!selectedCourse}
                     value={formData.program}
                     onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                    className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                    className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"
                   >
                     {filteredPrograms.length > 0 ? (
                       filteredPrograms.map((prog) => (
@@ -251,7 +303,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                         </option>
                       ))
                     ) : (
-                      <option value="">No programs available for this level</option>
+                      <option value="">No programs available for this level/university</option>
                     )}
                   </select>
                 </div>

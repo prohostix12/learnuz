@@ -21,6 +21,9 @@ const RegistrationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  university: {
+    type: String,
+  },
   status: {
     type: String,
     enum: ['new', 'reviewed', 'contacted', 'enrolled'],

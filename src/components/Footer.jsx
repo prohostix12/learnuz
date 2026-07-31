@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LearnuzLogo from './LearnuzLogo';
-import { Send, Globe, Shield, Heart, ArrowUpRight } from 'lucide-react';
+import { Globe, Shield, Heart, ArrowUpRight } from 'lucide-react';
+import ContactModal from './ContactModal';
 
 export default function Footer({ onOpenRegister }) {
+  const [isContactOpen, setIsContactOpen] = useState(false);
   return (
-    <footer id="footer" className="bg-green-900 text-slate-300 pt-16 pb-12 relative overflow-hidden border-t border-slate-800">
+    <footer id="footer" className="bg-[#091535] text-slate-300 pt-16 pb-12 relative overflow-hidden border-t border-slate-800">
       
       {/* Background Radial Lights */}
-      <div className="absolute top-0 left-1/3 w-96 h-96 bg-green-900 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -48,7 +50,7 @@ export default function Footer({ onOpenRegister }) {
           {/* Col 1 & 2: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="brightness-200">
-              <LearnuzLogo size="medium" />
+              <LearnuzLogo size="medium" isFooter={true} />
             </div>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               Learnuz is a premier educational platform connecting ambitious learners worldwide with accredited degree programs and courses from top partner universities.
@@ -91,31 +93,21 @@ export default function Footer({ onOpenRegister }) {
             </ul>
           </div>
 
-          {/* Col 5: Newsletter */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-              Newsletter
+          {/* Col 5: Contact Us */}
+          <div className="flex flex-col items-start lg:items-end lg:text-right">
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4 w-full">
+              Get in Touch
             </h4>
-            <p className="text-xs text-slate-400 mb-3">
-              Subscribe for university updates, scholarship alerts, and new course releases.
+            <p className="text-xs text-slate-400 mb-5 leading-relaxed max-w-xs text-left lg:text-right">
+              Have questions about university degrees, program details, or admission processes? Talk to our student advisors.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
-              {/* 
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1.5 top-1.5 p-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              */}
-            </form>
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-650 text-white font-extrabold text-xs shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/35 transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] active:scale-95 cursor-pointer border border-white/20 uppercase tracking-wider"
+            >
+              <span>Contact Us</span>
+              <ArrowUpRight className="w-4 h-4 text-white" />
+            </button>
           </div>
 
         </div>
@@ -134,6 +126,7 @@ export default function Footer({ onOpenRegister }) {
         </div>
 
       </div>
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </footer>
   );
 }

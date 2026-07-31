@@ -1,6 +1,7 @@
 import './globals.css';
 import VantaBackground from '../components/VantaBackground';
 import ScrollToTop from '../components/ScrollToTop';
+import LenisProvider from '../components/LenisProvider';
 
 export const metadata = {
   title: 'Learnuz - Shaping Minds, Building Futures Through Smarter Learning',
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-transparent text-[#0f172a] font-sans antialiased selection:bg-[#1f3f7a] selection:text-white" suppressHydrationWarning>
-        <VantaBackground />
-        <ScrollToTop />
-        {children}
+        <LenisProvider>
+          <VantaBackground />
+          <ScrollToTop />
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );
