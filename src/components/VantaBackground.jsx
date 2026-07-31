@@ -5,13 +5,26 @@ import Script from 'next/script';
 
 export default function VantaBackground() {
   const containerRef = useRef(null);
-  const [vantaEffect, setVantaEffect] = useState(null);
+  const vantaEffectRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [threeLoaded, setThreeLoaded] = useState(false);
   const [vantaLoaded, setVantaLoaded] = useState(false);
 
   useEffect(() => {
-    // Only run on client and when scripts are loaded and container is available
+    // Determine if we should load the heavy WebGL background
+    if (typeof window !== 'undefined') {
+      const isMobileOrTablet = window.innerWidth < 1024; // Disable Vanta on screens < 1024px to prevent scroll lag on mobile/tablet
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!isMobileOrTablet && !prefersReducedMotion) {
+        setShouldLoad(true);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (
+      shouldLoad &&
       threeLoaded &&
       vantaLoaded &&
       typeof window !== 'undefined' &&
@@ -19,7 +32,7 @@ export default function VantaBackground() {
       window.VANTA.NET &&
       containerRef.current
     ) {
-      if (!vantaEffect) {
+      if (!vantaEffectRef.current) {
         try {
           const effect = window.VANTA.NET({
             el: containerRef.current,
@@ -32,12 +45,12 @@ export default function VantaBackground() {
             scaleMobile: 1.00,
             backgroundColor: 0xf8fafc, // Clean slate white light-mode background color
             color: 0x03ae92, // Gorgeous green-blue network connection lines/dots
-            points: 12.00,
-            maxDistance: 22.00,
-            spacing: 16.00,
+            points: 10.00, // Reduced from 12 to optimize performance
+            maxDistance: 20.00, // Reduced from 22 to optimize performance
+            spacing: 18.00, // Increased spacing to render fewer nodes and lines
             showDots: true
           });
-          setVantaEffect(effect);
+          vantaEffectRef.current = effect;
         } catch (error) {
           console.error("Vanta NET initialization error:", error);
         }
@@ -45,11 +58,14 @@ export default function VantaBackground() {
     }
 
     return () => {
-      if (vantaEffect) {
-        vantaEffect.destroy();
+      if (vantaEffectRef.current) {
+        vantaEffectRef.current.destroy();
+        vantaEffectRef.current = null;
       }
     };
-  }, [threeLoaded, vantaLoaded, vantaEffect]);
+  }, [shouldLoad, threeLoaded, vantaLoaded]);
+
+  if (!shouldLoad) return null;
 
   return (
     <>

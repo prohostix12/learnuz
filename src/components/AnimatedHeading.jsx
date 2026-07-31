@@ -106,7 +106,7 @@ export default function AnimatedHeading({
             return (
               <span
                 key={`${linePrefix}-c-${globalCharIdx}-${headingIndex}`}
-                className={`inline-block animate-letter-pop transition-all duration-150 transform hover:scale-110 ${
+                className={`inline-block animate-letter-pop transition-transform duration-150 transform hover:scale-110 ${
                   inHighlight 
                     ? 'bg-blue-600 bg-clip-text text-transparent font-black drop-shadow-sm' 
                     : ''
