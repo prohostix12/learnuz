@@ -11,10 +11,12 @@ import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import RegisterModal from '../components/RegisterModal';
 import CourseFinder from '../components/course-finder/CourseFinder';
+import CompareModal from '../components/CompareModal';
 
 export default function Home() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isCourseFinderOpen, setIsCourseFinderOpen] = useState(false);
+  const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
   const [wasOpen, setWasOpen] = useState(false);
@@ -106,7 +108,7 @@ export default function Home() {
         {/* <Features /> */}
 
         {/* Accredited Partner Universities */}
-        <Universities onOpenRegister={handleOpenRegister} />
+        <Universities onOpenRegister={handleOpenRegister} onOpenCompare={() => setIsCompareOpen(true)} />
 
         {/* Popular Subjects & Courses Grid with Filters */}
         <PopularSubjects 
@@ -135,6 +137,13 @@ export default function Home() {
       <CourseFinder 
         isOpen={isCourseFinderOpen} 
         onClose={() => setIsCourseFinderOpen(false)} 
+      />
+
+      {/* Compare Modal */}
+      <CompareModal 
+        isOpen={isCompareOpen} 
+        onClose={() => setIsCompareOpen(false)} 
+        onApplyCourse={(course) => handleOpenRegister(course)} 
       />
     </div>
   );

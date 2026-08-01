@@ -227,10 +227,11 @@ export default function ContactPage() {
                   <p className="text-xs text-slate-500 mt-1">Emergency support desk available on Sunday</p>
                 </div>
               </motion.div>
+             
 
             </div>
 
-            {/* Extra Trust Badging */}
+            {/* Extra Trust Badging
             <motion.div 
               variants={itemVariants}
               className="p-6 rounded-3xl bg-slate-900 text-white space-y-4 shadow-xl border border-slate-800"
@@ -248,6 +249,7 @@ export default function ContactPage() {
                 <span className="flex items-center gap-1"><Globe className="w-3 h-3 text-blue-400" /> Pan-India Support</span>
               </div>
             </motion.div>
+            */}
 
           </div>
 

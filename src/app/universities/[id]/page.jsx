@@ -87,9 +87,9 @@ export default function UniversityDetailPage({ params }) {
 
   const handleOpenRegister = (course = null) => {
     if (course) {
-      setSelectedCourse({ title: `${course.code} - ${course.title} at ${university?.name}` });
+      setSelectedCourse(course);
     } else {
-      setSelectedCourse({ title: `Admission to ${university?.name}` });
+      setSelectedCourse({ university: university?.name });
     }
     setIsRegisterOpen(true);
   };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   Clock, 
   CalendarDays, 
@@ -8,12 +9,14 @@ import {
   X, 
   BookOpen, 
   TrendingUp,
-  Award
+  Award,
+  ArrowRight
 } from 'lucide-react';
 import UniversityLogo from './UniversityLogo';
 import SyllabusModal from './SyllabusModal';
 
 export default function PopularSubjects({ onSelectCourse }) {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('All');
   const [programsData, setProgramsData] = useState([]);
   const [universities, setUniversities] = useState([]);
@@ -123,7 +126,7 @@ export default function PopularSubjects({ onSelectCourse }) {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPrograms.map((program) => (
+            {filteredPrograms.slice(0, 6).map((program) => (
               <div
                 key={program._id}
                 className="bg-white rounded-[2.2rem] border border-slate-100/70 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
@@ -222,6 +225,19 @@ export default function PopularSubjects({ onSelectCourse }) {
 
               </div>
             ))}
+          </div>
+        )}
+
+        {/* View More Programs Button */}
+        {!loading && filteredPrograms.length > 6 && (
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={() => router.push('/programs')}
+              className="bg-transparent border-0 outline-none text-indigo-600 hover:text-indigo-800 font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer hover:underline"
+            >
+              <span>View More Programs</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         )}
 

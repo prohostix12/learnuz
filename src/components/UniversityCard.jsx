@@ -161,11 +161,16 @@ export default function UniversityCard({ university, onSelect, programs = [] }) 
         <span className="text-[10px] uppercase font-bold text-[#5E6C84] tracking-wider block mb-1.5">Offered Programs</span>
         {programs.length > 0 ? (
           <div className="flex flex-wrap gap-1.5">
-            {programs.map((prog, idx) => (
+            {programs.slice(0, 4).map((prog, idx) => (
               <span key={prog._id || idx} className="px-2.5 py-1 bg-slate-50 border border-slate-200/60 text-slate-700 hover:bg-slate-100 rounded-lg text-[10px] font-bold tracking-wide transition-colors" title={prog.title}>
                 {prog.code} - {prog.title}
               </span>
             ))}
+            {programs.length > 4 && (
+              <span className="px-2.5 py-1 bg-blue-50 border border-blue-100 text-blue-600 rounded-lg text-[10px] font-extrabold tracking-wide" title="Click View Details to explore all programs">
+                +{programs.length - 4} more
+              </span>
+            )}
           </div>
         ) : (
           <span className="text-[10px] font-semibold text-slate-400 italic">Explore programs in detail</span>

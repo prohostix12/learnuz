@@ -49,7 +49,7 @@ export default function UniversitySearch({ onSearch }) {
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="w-full bg-white/80 backdrop-blur-xl border border-white/60 rounded-full shadow-lg hover:shadow-2xl focus-within:shadow-2xl focus-within:scale-[1.015] focus-within:border-blue-500/40 p-2 pl-4 flex flex-col md:flex-row items-center gap-2 md:gap-0 transition-all duration-300 relative"
+        className="w-full bg-white/80 backdrop-blur-xl border border-white/60 rounded-none md:rounded-full shadow-lg hover:shadow-2xl focus-within:shadow-2xl focus-within:scale-[1.015] focus-within:border-blue-500/40 p-2 pl-4 flex flex-col md:flex-row items-center gap-2 md:gap-0 transition-all duration-300 relative"
       >
         {/* Search Icon (Blue) */}
         <div className="flex items-center justify-center text-blue-600 pl-2 shrink-0 hidden md:flex">
@@ -139,7 +139,7 @@ export default function UniversitySearch({ onSearch }) {
 
         {/* Search Button (Right-aligned, circular) */}
         <button
-          className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all shrink-0 hover:rotate-12 cursor-pointer"
+          className="w-full md:w-12 h-12 rounded-none md:rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all shrink-0 hover:rotate-12 cursor-pointer"
           aria-label="Submit Search"
         >
           <Search className="w-5 h-5" />

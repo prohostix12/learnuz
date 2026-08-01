@@ -9,7 +9,6 @@ import Footer from '../../components/Footer';
 import RegisterModal from '../../components/RegisterModal';
 import UniversityCard from '../../components/UniversityCard';
 import UniversitySearch from '../../components/UniversitySearch';
-import UniversityFilters from '../../components/UniversityFilters';
 
 export default function UniversitiesPage() {
   const router = useRouter();
@@ -58,7 +57,7 @@ export default function UniversitiesPage() {
   });
 
   const handleOpenRegister = (uni = null) => {
-    setSelectedCourse(uni ? { title: `Admission to ${uni.name} (${uni.shortName})` } : null);
+    setSelectedCourse(uni ? { university: uni.name } : null);
     setIsRegisterOpen(true);
   };
 
@@ -220,11 +219,6 @@ export default function UniversitiesPage() {
         {/* Sticky Search bar section */}
         <section className="sticky top-6 z-25 mb-8">
           <UniversitySearch onSearch={handleSearchChange} />
-        </section>
-
-        {/* Dropdown Filters section */}
-        <section className="mb-12">
-          <UniversityFilters activeFilters={filters} onFilterChange={handleFilterChange} />
         </section>
 
         {/* University Grid */}

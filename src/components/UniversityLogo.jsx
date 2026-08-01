@@ -28,11 +28,13 @@ export const AMULogo = () => (
 export default function UniversityLogo({ universityName = '', logoUrl = '' }) {
   if (logoUrl) {
     return (
-      <img 
-        src={logoUrl} 
-        alt={universityName} 
-        className="w-full h-full object-contain p-1 shrink-0 rounded-lg" 
-      />
+      <div className="w-9 h-9 flex items-center justify-center overflow-hidden bg-white rounded-lg border border-slate-100/80 shrink-0 shadow-sm">
+        <img 
+          src={logoUrl} 
+          alt={universityName} 
+          className="w-full h-full object-contain p-0.5" 
+        />
+      </div>
     );
   }
 

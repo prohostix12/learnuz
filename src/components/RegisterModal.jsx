@@ -22,13 +22,29 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
   const [mounted, setMounted] = useState(false);
   const [programs, setPrograms] = useState(initialPrograms || []);
   
+  const getInitialProgram = () => {
+    if (selectedCourse && selectedCourse.title) {
+      return selectedCourse.title;
+    }
+    const initialLevel = selectedCourse?.level ? reverseLevelMapping[selectedCourse.level] : 'Bachelor Degree';
+    const targetLevel = levelMapping[initialLevel];
+    const initialUni = selectedCourse?.university ? selectedCourse.university : 'All Universities';
+    
+    const matchingProgs = initialPrograms.filter(p => {
+      const matchesLevel = p.level === targetLevel;
+      const matchesUni = initialUni === 'All Universities' || p.university === initialUni;
+      return matchesLevel && matchesUni;
+    });
+    return matchingProgs.length > 0 ? matchingProgs[0].title : '';
+  };
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
-    program: selectedCourse ? selectedCourse.title : (initialPrograms.filter(p => p.level === 'Undergraduate')[0]?.title || ''),
-    degreeLevel: selectedCourse ? (reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree') : 'Bachelor Degree',
-    university: selectedCourse ? selectedCourse.university : 'All Universities'
+    program: getInitialProgram(),
+    degreeLevel: selectedCourse?.level ? (reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree') : 'Bachelor Degree',
+    university: selectedCourse?.university ? selectedCourse.university : 'All Universities'
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -59,13 +75,29 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
   // Synchronize program when selectedCourse changes
   useEffect(() => {
     if (selectedCourse) {
-      const mappedLevel = reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree';
-      setFormData(prev => ({
-        ...prev,
-        degreeLevel: mappedLevel,
-        university: selectedCourse.university,
-        program: selectedCourse.title
-      }));
+      if (selectedCourse.title) {
+        const mappedLevel = reverseLevelMapping[selectedCourse.level] || 'Bachelor Degree';
+        setFormData(prev => ({
+          ...prev,
+          degreeLevel: mappedLevel,
+          university: selectedCourse.university,
+          program: selectedCourse.title
+        }));
+      } else {
+        const targetLevel = levelMapping['Bachelor Degree'];
+        const matchingProgs = programs.filter(p => {
+          const matchesLevel = p.level === targetLevel;
+          const matchesUni = selectedCourse.university === 'All Universities' || p.university === selectedCourse.university;
+          return matchesLevel && matchesUni;
+        });
+        const defaultProgram = matchingProgs.length > 0 ? matchingProgs[0].title : '';
+        setFormData(prev => ({
+          ...prev,
+          degreeLevel: 'Bachelor Degree',
+          university: selectedCourse.university,
+          program: defaultProgram
+        }));
+      }
     } else {
       const defaultProgram = initialPrograms.filter(p => p.level === 'Undergraduate')[0]?.title || '';
       setFormData(prev => ({
@@ -75,7 +107,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
         program: defaultProgram
       }));
     }
-  }, [selectedCourse]);
+  }, [selectedCourse, programs]);
 
   const handleDegreeLevelChange = (e) => {
     const newDegreeLevel = e.target.value;
@@ -252,7 +284,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                     Degree Level
                   </label>
                   <select
-                    disabled={!!selectedCourse}
+                    disabled={selectedCourse && !!selectedCourse.title}
                     value={formData.degreeLevel}
                     onChange={handleDegreeLevelChange}
                     className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"
@@ -269,7 +301,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                     University
                   </label>
                   <select
-                    disabled={!!selectedCourse}
+                    disabled={selectedCourse && !!selectedCourse.title}
                     value={formData.university}
                     onChange={handleUniversityChange}
                     className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"
@@ -291,7 +323,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 z-10 pointer-events-none" />
                   <select
-                    disabled={!!selectedCourse}
+                    disabled={selectedCourse && !!selectedCourse.title}
                     value={formData.program}
                     onChange={(e) => setFormData({ ...formData, program: e.target.value })}
                     className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed disabled:border-slate-100"

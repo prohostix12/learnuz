@@ -208,7 +208,7 @@ function ComparisonBanner({ title, subtitle, buttonText, onClick }) {
   );
 }
 
-export default function Universities() {
+export default function Universities({ onOpenCompare }) {
   const router = useRouter();
   const [universitiesList, setUniversitiesList] = React.useState(staticUniversities);
   const [programsData, setProgramsData] = React.useState([]);
@@ -301,7 +301,7 @@ export default function Universities() {
               title="Find Your Perfect University" 
               subtitle="Compare, Explore and Choose the Best for You." 
               buttonText="Compare Now"
-              onClick={handleNavigate}
+              onClick={onOpenCompare}
             />
           </div>
         </div>

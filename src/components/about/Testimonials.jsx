@@ -1,60 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 
+const staticTestimonials = [
+  {
+    name: 'Sneha Nair',
+    role: 'Student',
+    country: 'United Kingdom',
+    university: 'Oxford Online / Leeds Beckett University',
+    course: 'MSc Computer Science',
+    rating: 5,
+    quote: 'Learnuz changed my academic career pathway completely! The 1-on-1 career counselling helped me select the right universities and credits, and their team was there for my application submissions and visa checklists.',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+  },
+  {
+    name: 'Rohan Patel',
+    role: 'Alumnus',
+    country: 'United States',
+    university: 'Stanford Extension / University of Illinois',
+    course: 'MSc Data Science',
+    rating: 5,
+    quote: 'Excellent counselors! They answered every query about overseas banking, scholarship criteria, and academic eligibility transparently. I successfully received my offer letter and F-1 student visa without issues.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+  },
+  {
+    name: 'Ananya Rao',
+    role: 'Student',
+    country: 'Germany',
+    university: 'Technical University Munich',
+    course: 'MBA Innovation & Management',
+    rating: 5,
+    quote: 'Learnuz streamlined my admissions file. Their support team was highly responsive, helping me prepare a compelling Statement of Purpose (SOP) and obtaining a fully-funded DAAD scholarship.',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400',
+  },
+  {
+    name: 'Michael Brown',
+    role: 'Alumnus',
+    country: 'Canada',
+    university: 'University of Toronto',
+    course: 'BSc Business Analytics',
+    rating: 5,
+    quote: 'Exceptional end-to-end guidance! The team is highly experienced in student visa processing. They conducted mock interviews with me which built my confidence. Strongly recommend Learnuz to anyone studying abroad.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400',
+  },
+  {
+    name: 'Jessica Lim',
+    role: 'Student',
+    country: 'Australia',
+    university: 'University of Sydney',
+    course: 'Master of Information Technology',
+    rating: 5,
+    quote: 'I got a 50% tuition fee waiver scholarship through Learnuz! Their team evaluated my GPA, suggested targeted universities, and filed my admissions files efficiently. Their service is truly premium.',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400',
+  }
+];
+
 export default function Testimonials() {
-  const testimonials = [
-    {
-      name: 'Sneha Nair',
-      role: 'Student',
-      country: 'United Kingdom',
-      university: 'Oxford Online / Leeds Beckett University',
-      course: 'MSc Computer Science',
-      rating: 5,
-      quote: 'Learnuz changed my academic career pathway completely! The 1-on-1 career counselling helped me select the right universities and credits, and their team was there for my application submissions and visa checklists.',
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    },
-    {
-      name: 'Rohan Patel',
-      role: 'Alumnus',
-      country: 'United States',
-      university: 'Stanford Extension / University of Illinois',
-      course: 'MSc Data Science',
-      rating: 5,
-      quote: 'Excellent counselors! They answered every query about overseas banking, scholarship criteria, and academic eligibility transparently. I successfully received my offer letter and F-1 student visa without issues.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
-    },
-    {
-      name: 'Ananya Rao',
-      role: 'Student',
-      country: 'Germany',
-      university: 'Technical University Munich',
-      course: 'MBA Innovation & Management',
-      rating: 5,
-      quote: 'Learnuz streamlined my admissions file. Their support team was highly responsive, helping me prepare a compelling Statement of Purpose (SOP) and obtaining a fully-funded DAAD scholarship.',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400',
-    },
-    {
-      name: 'Michael Brown',
-      role: 'Alumnus',
-      country: 'Canada',
-      university: 'University of Toronto',
-      course: 'BSc Business Analytics',
-      rating: 5,
-      quote: 'Exceptional end-to-end guidance! The team is highly experienced in student visa processing. They conducted mock interviews with me which built my confidence. Strongly recommend Learnuz to anyone studying abroad.',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400',
-    },
-    {
-      name: 'Jessica Lim',
-      role: 'Student',
-      country: 'Australia',
-      university: 'University of Sydney',
-      course: 'Master of Information Technology',
-      rating: 5,
-      quote: 'I got a 50% tuition fee waiver scholarship through Learnuz! Their team evaluated my GPA, suggested targeted universities, and filed my admissions files efficiently. Their service is truly premium.',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400',
+  const [testimonials, setTestimonials] = useState(staticTestimonials);
+
+  useEffect(() => {
+    async function loadTestimonials() {
+      try {
+        const res = await fetch('/api/testimonials');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            setTestimonials(data);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching testimonials in about:", err);
+      }
     }
-  ];
+    loadTestimonials();
+  }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
@@ -124,15 +143,15 @@ export default function Testimonials() {
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               className="w-full max-w-4xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800/80 rounded-[2.5rem] p-8 sm:p-12 md:p-16 shadow-2xl flex flex-col md:flex-row gap-8 sm:gap-12 items-center"
             >
-              {/* Left Column: Student Image */}
+               {/* Left Column: Student Image */}
               <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 shrink-0 rounded-3xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
                 <img
-                  src={currentTestimonial.image}
+                  src={currentTestimonial.image || currentTestimonial.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}
                   alt={currentTestimonial.name}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase">
-                  {currentTestimonial.country}
+                  {currentTestimonial.country || 'Global'}
                 </div>
               </div>
 
@@ -144,7 +163,7 @@ export default function Testimonials() {
 
                 {/* Stars Rating */}
                 <div className="flex items-center gap-1">
-                  {[...Array(currentTestimonial.rating)].map((_, i) => (
+                  {[...Array(currentTestimonial.rating || 5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
