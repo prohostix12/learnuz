@@ -64,7 +64,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-slate-50/40 backdrop-blur-md relative overflow-hidden">
+    <section className="py-24 sm:py-32 bg-white/30 backdrop-blur-md relative overflow-hidden">
       
       {/* Decorative Blur Spheres */}
       <div className="absolute top-10 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>

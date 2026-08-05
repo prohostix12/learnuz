@@ -106,7 +106,7 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-24 sm:py-32 bg-white/30 backdrop-blur-md dark:bg-slate-950/30 relative overflow-hidden">
+    <section className="py-24 sm:py-32 bg-white/30 backdrop-blur-md relative overflow-hidden">
       
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -115,16 +115,16 @@ export default function Testimonials() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 font-bold text-xs uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-650 font-bold text-xs uppercase tracking-widest">
             <span>Success Stories</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black leading-tight">
             Hear From Our{' '}
-            <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Global Learners
             </span>
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-slate-800 dark:text-slate-200 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-black font-semibold leading-relaxed">
             See how Learnuz helps students secure admission packages and global careers.
           </p>
         </div>
@@ -141,10 +141,10 @@ export default function Testimonials() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="w-full max-w-4xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800/80 rounded-[2.5rem] p-8 sm:p-12 md:p-16 shadow-2xl flex flex-col md:flex-row gap-8 sm:gap-12 items-center"
+              className="w-full max-w-4xl bg-white/50 border border-slate-200/50 rounded-[2.5rem] p-8 sm:p-12 md:p-16 shadow-2xl flex flex-col md:flex-row gap-8 sm:gap-12 items-center"
             >
                {/* Left Column: Student Image */}
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 shrink-0 rounded-3xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
+              <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 shrink-0 rounded-3xl overflow-hidden border-4 border-white shadow-xl">
                 <img
                   src={currentTestimonial.image || currentTestimonial.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}
                   alt={currentTestimonial.name}
@@ -169,19 +169,19 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote Text */}
-                <blockquote className="text-base sm:text-lg md:text-xl font-normal text-slate-950 dark:text-slate-100 leading-relaxed italic">
+                <blockquote className="text-base sm:text-lg md:text-xl font-bold text-black leading-relaxed italic">
                   "{currentTestimonial.quote}"
                 </blockquote>
 
                 {/* Sign-off Details */}
                 <div className="pt-2">
-                  <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
+                  <h4 className="text-lg font-extrabold text-black">
                     {currentTestimonial.name}
                   </h4>
-                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <p className="text-sm font-semibold text-slate-800">
                     {currentTestimonial.course}
                   </p>
-                  <p className="text-xs font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-wider mt-1">
+                  <p className="text-xs font-bold text-indigo-650 uppercase tracking-wider mt-1">
                     {currentTestimonial.university}
                   </p>
                 </div>
@@ -196,10 +196,10 @@ export default function Testimonials() {
         <div className="flex items-center justify-center gap-6 mt-8">
           <button
             onClick={handlePrev}
-            className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors shadow-sm cursor-pointer"
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-100 transition-colors shadow-sm cursor-pointer"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+            <ChevronLeft className="w-6 h-6 text-slate-700" />
           </button>
           
           {/* Dot Indicators */}
@@ -212,7 +212,7 @@ export default function Testimonials() {
                   setCurrentIndex(i);
                 }}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? 'w-6 bg-indigo-500' : 'w-2 bg-slate-300 dark:bg-slate-700'
+                  i === currentIndex ? 'w-6 bg-indigo-500' : 'w-2 bg-slate-300'
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -221,10 +221,10 @@ export default function Testimonials() {
 
           <button
             onClick={handleNext}
-            className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors shadow-sm cursor-pointer"
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-100 transition-colors shadow-sm cursor-pointer"
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+            <ChevronRight className="w-6 h-6 text-slate-700" />
           </button>
         </div>
 

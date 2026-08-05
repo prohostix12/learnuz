@@ -29,7 +29,7 @@ export default function AboutClientPage() {
   };
 
   return (
-    <div className="universities-page-wrap min-h-screen bg-[#F8FAFF]/30 backdrop-blur-md text-[#0F172A] relative flex flex-col overflow-x-hidden">
+    <div className="universities-page-wrap min-h-screen bg-[#f8fafc]/30 backdrop-blur-md text-[#0F172A] relative flex flex-col overflow-x-hidden">
       
       {/* Navigation Header */}
       <Navbar 
@@ -49,27 +49,27 @@ export default function AboutClientPage() {
         <AboutSection />
 
         {/* 3. Numbers Section / Statistics (Dark Gradient) */}
-        <Statistics />
+        {/* <Statistics /> */}
 
         {/* 4. Full Width Parallax Mission Banner */}
-        <MissionBanner 
+        {/* <MissionBanner 
           onOpenCourseFinder={() => setIsCourseFinderOpen(true)}
-        />
+        /> */}
 
         {/* 5. Why Choose Learnuz Section */}
-        <WhyChoose />
+        {/* <WhyChoose /> */}
 
         {/* 6. How We Help / Student Journey Timeline */}
-        <StudentJourney />
+        {/* <StudentJourney /> */}
 
         {/* 7. Global Universities Section (Map connection illustration) */}
-        <GlobalUniversities />
+        {/* <GlobalUniversities /> */}
 
         {/* 8. Core Values Section */}
         <Values />
 
         {/* 9. Testimonials Carousel */}
-        <Testimonials />
+        {/* <Testimonials /> */}
 
         {/* 10. FAQ Accordions */}
         <FAQ />
