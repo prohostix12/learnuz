@@ -185,24 +185,26 @@ export default function PopularSubjects({ onSelectCourse }) {
                   </div>
 
                   {/* Fee Box Container */}
-                  <div className="bg-[#f8fafc] border border-slate-100 rounded-2xl p-4.5 flex items-center justify-between mb-6 shadow-inner">
-                    <div className="space-y-1">
-                      <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
-                        Fee per Semester
-                      </span>
-                      <span className="text-xl font-black text-[#9b1c1c] tracking-tight">
-                        {program.fee}
-                      </span>
+                  {program.fee && program.fee !== 'N/A' && program.emi && program.emi !== 'N/A' && (
+                    <div className="bg-[#f8fafc] border border-slate-100 rounded-2xl p-4.5 flex items-center justify-between mb-6 shadow-inner">
+                      <div className="space-y-1">
+                        <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
+                          Fee per Semester
+                        </span>
+                        <span className="text-xl font-black text-[#9b1c1c] tracking-tight">
+                          {program.fee}
+                        </span>
+                      </div>
+                      <div className="text-right space-y-1">
+                        <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
+                          EMI from
+                        </span>
+                        <span className="text-base font-extrabold text-[#1d4ed8]">
+                          {program.emi}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-right space-y-1">
-                      <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
-                        EMI from
-                      </span>
-                      <span className="text-base font-extrabold text-[#1d4ed8]">
-                        {program.emi}
-                      </span>
-                    </div>
-                  </div>
+                  )}
 
                 </div>
 

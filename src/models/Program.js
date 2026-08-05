@@ -32,7 +32,7 @@ const ProgramSchema = new mongoose.Schema({
   },
   fee: {
     type: String,
-    required: true, // e.g. "₹23,250"
+    default: 'N/A', // e.g. "₹23,250"
   },
   emi: {
     type: String,

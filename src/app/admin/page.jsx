@@ -111,8 +111,8 @@ export default function AdminDashboard() {
     accreditation: 'NAAC A+',
     duration: '3 Years',
     semesters: '6 Semesters',
-    fee: '₹25,000',
-    emi: '₹4,166/mo',
+    fee: '',
+    emi: '',
     featured: false,
     category: 'Computer Science',
     syllabus: '',
@@ -236,6 +236,8 @@ export default function AdminDashboard() {
 
       const payload = {
         ...progForm,
+        fee: progForm.fee && progForm.fee.trim() ? progForm.fee.trim() : 'N/A',
+        emi: progForm.emi && progForm.emi.trim() ? progForm.emi.trim() : 'N/A',
         syllabus: syllabusArray,
         careers: careersArray
       };
@@ -362,8 +364,8 @@ export default function AdminDashboard() {
       accreditation: prog.accreditation,
       duration: prog.duration,
       semesters: prog.semesters,
-      fee: prog.fee,
-      emi: prog.emi || 'N/A',
+      fee: prog.fee === 'N/A' ? '' : (prog.fee || ''),
+      emi: prog.emi === 'N/A' ? '' : (prog.emi || ''),
       featured: prog.featured,
       category: prog.category,
       syllabus: prog.syllabus ? prog.syllabus.join(', ') : '',
@@ -403,8 +405,8 @@ export default function AdminDashboard() {
       accreditation: 'NAAC A+',
       duration: '3 Years',
       semesters: '6 Semesters',
-      fee: '₹25,000',
-      emi: '₹4,166/mo',
+      fee: '',
+      emi: '',
       featured: false,
       category: 'Computer Science',
       syllabus: '',
@@ -1533,9 +1535,9 @@ export default function AdminDashboard() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Fee per Semester</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Fee per Semester (Optional)</label>
                   <input
-                    type="text" required
+                    type="text"
                     value={progForm.fee}
                     onChange={(e) => setProgForm({ ...progForm, fee: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"
@@ -1543,9 +1545,9 @@ export default function AdminDashboard() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">EMI Option (Monthly)</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">EMI Option (Monthly) (Optional)</label>
                   <input
-                    type="text" required
+                    type="text"
                     value={progForm.emi}
                     onChange={(e) => setProgForm({ ...progForm, emi: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500"

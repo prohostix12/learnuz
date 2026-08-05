@@ -410,18 +410,18 @@ export default function UniversityDetailPage({ params }) {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
                           
                           {/* Fees Info */}
-                          <div className="flex items-center gap-6">
-                            <div>
-                              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Semester Fee</span>
-                              <span className="text-base font-black text-[#9b1c1c]">{prog.fee}</span>
-                            </div>
-                            {prog.emi && prog.emi !== 'N/A' && (
+                          {prog.fee && prog.fee !== 'N/A' && prog.emi && prog.emi !== 'N/A' && (
+                            <div className="flex items-center gap-6">
+                              <div>
+                                <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Semester Fee</span>
+                                <span className="text-base font-black text-[#9b1c1c]">{prog.fee}</span>
+                              </div>
                               <div>
                                 <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">EMI option</span>
                                 <span className="text-sm font-extrabold text-[#1d4ed8]">{prog.emi}</span>
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
 
                           {/* Buttons */}
                           <div className="flex items-center gap-2.5 sm:self-end">
