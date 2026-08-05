@@ -86,10 +86,12 @@ export default function Footer({ onOpenRegister }) {
               Academic Partners
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
-              <li><a href="#universities" className="hover:text-blue-400 transition-colors">Oxford Online</a></li>
-              <li><a href="#universities" className="hover:text-blue-400 transition-colors">Stanford Extension</a></li>
-              <li><a href="#universities" className="hover:text-blue-400 transition-colors">Harvard Courses</a></li>
-              <li><a href="#universities" className="hover:text-blue-400 transition-colors">MIT Open Learning</a></li>
+              <li><a href="/universities" className="hover:text-blue-400 transition-colors">Amrita Vishwa Vidyapeetham</a></li>
+              <li><a href="/universities" className="hover:text-blue-400 transition-colors">Andhra University</a></li>
+              <li><a href="/universities/gla" className="hover:text-blue-400 transition-colors">GLA University</a></li>
+              <li><a href="/universities" className="hover:text-blue-400 transition-colors">Mizoram University</a></li>
+              <li><a href="/universities" className="hover:text-blue-400 transition-colors">Manipal University Jaipur</a></li>
+              <li><a href="/universities/smu" className="hover:text-blue-400 transition-colors">Sikkim Manipal University</a></li>
             </ul>
           </div>
 

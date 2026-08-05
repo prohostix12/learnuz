@@ -2556,5 +2556,643 @@ export const initialPrograms = [
       "Trade Relations Executive"
     ],
     description: "The BCom in Economics program covers micro/macro theories, trade models, public finance policies, and national economic indicators."
+  },
+  {
+    code: "BCA Data Science & Analytics",
+    level: "Undergraduate",
+    title: "BCA Data Science & Analytics",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "3 Years",
+    semesters: "6 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Programming in Python",
+      "Statistical Methods",
+      "Data Structures & Algorithms",
+      "Data Visualization",
+      "Machine Learning Basics",
+      "Big Data Analytics"
+    ],
+    careers: [
+      "Data Analyst",
+      "Business Intelligence Analyst",
+      "Data Engineer Associate",
+      "Data Visualizer",
+      "Machine Learning Engineer Associate"
+    ],
+    description: "The BCA in Data Science & Analytics equips students with statistical computing methods, data analysis, visualization models, and ML application techniques."
+  },
+  {
+    code: "BCA Cloud Computing",
+    level: "Undergraduate",
+    title: "BCA Cloud Computing",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "3 Years",
+    semesters: "6 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Cloud Infrastructure & Services",
+      "Virtualization Technologies",
+      "Operating Systems Basics",
+      "AWS & Azure Architectures",
+      "Cloud Security & Auditing",
+      "DevOps Principles"
+    ],
+    careers: [
+      "Cloud Infrastructure Associate",
+      "Cloud Administrator",
+      "AWS Support Engineer",
+      "DevOps Trainee",
+      "Cloud Security Analyst Associate"
+    ],
+    description: "The BCA in Cloud Computing focuses on virtualization technologies, public/private cloud setups, storage infrastructures, and DevOps practices."
+  },
+  {
+    code: "BCA Cyber Security",
+    level: "Undergraduate",
+    title: "BCA Cyber Security",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "3 Years",
+    semesters: "6 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Introduction to Cryptography",
+      "Network Security Protocols",
+      "Ethical Hacking Concepts",
+      "Cyber Laws & Ethics",
+      "Digital Forensics Basics",
+      "Application Security"
+    ],
+    careers: [
+      "Cyber Security Executive",
+      "Ethical Hacker Trainee",
+      "Security Analyst",
+      "Network Security Engineer Associate",
+      "Compliance Auditor"
+    ],
+    description: "The BCA in Cyber Security covers cryptographic systems, ethical hacking processes, threat analysis, network protection systems, and digital forensics."
+  },
+  {
+    code: "MBA Information System Management",
+    level: "Postgraduate",
+    title: "MBA Information System Management",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Enterprise Resource Planning (ERP)",
+      "Database Management Systems",
+      "IT Project Management",
+      "Strategic IT Leadership",
+      "Systems Analysis & Design",
+      "Information Security Governance"
+    ],
+    careers: [
+      "IT Manager",
+      "Systems Analyst",
+      "ERP Consultant",
+      "IT Project Director",
+      "Chief Information Officer"
+    ],
+    description: "The MBA in Information System Management integrates corporate business administration with enterprise databases, system security standards, and IT project control."
+  },
+  {
+    code: "MBA Finance",
+    level: "Postgraduate",
+    title: "MBA Finance",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Corporate Finance",
+      "Investment Analysis & Portfolio Management",
+      "Financial Risk Management",
+      "Mergers & Acquisitions",
+      "Taxation & Financial Planning",
+      "International Finance"
+    ],
+    careers: [
+      "Financial Analyst",
+      "Investment Banker",
+      "Portfolio Manager",
+      "Treasury Manager",
+      "Risk Analyst"
+    ],
+    description: "The MBA in Finance covers core financial principles, investment strategies, risk management, and corporate financial planning to prepare financial leaders."
+  },
+  {
+    code: "MBA HRM",
+    level: "Postgraduate",
+    title: "MBA HRM",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Human Resource Planning",
+      "Organizational Behavior",
+      "Talent Acquisition & Management",
+      "Employee Relations & Labor Laws",
+      "Performance Management Systems",
+      "Strategic HRM"
+    ],
+    careers: [
+      "HR Manager",
+      "Talent Acquisition Specialist",
+      "HR Business Partner",
+      "Compensation & Benefits Consultant",
+      "Training & Development Manager"
+    ],
+    description: "The MBA in Human Resource Management (HR) focuses on talent management, organizational dynamics, recruitment, employee relations, and workforce planning."
+  },
+  {
+    code: "MBA BFSI",
+    level: "Postgraduate",
+    title: "MBA BFSI",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Banking Technology & Operations",
+      "Financial Services Marketing",
+      "Insurance Risk Management",
+      "Treasury & Investment Banking",
+      "FinTech Applications",
+      "BFSI Regulatory Compliance"
+    ],
+    careers: [
+      "Branch Manager",
+      "BFSI Consultant",
+      "Wealth Manager",
+      "Risk Officer",
+      "FinTech Product Owner"
+    ],
+    description: "The MBA in Banking, Financial Services, and Insurance (BFSI) provides deep training in banking structures, fintech operations, asset management, and risk frameworks."
+  },
+  {
+    code: "MBA Digital Marketing",
+    level: "Postgraduate",
+    title: "MBA Digital Marketing",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Digital Marketing Strategy",
+      "Search Engine Optimization (SEO)",
+      "Social Media Analytics",
+      "Content & E-mail Marketing",
+      "Web Analytics & Tools",
+      "Online PR & Brand Reputation"
+    ],
+    careers: [
+      "Digital Marketing Manager",
+      "SEO/SEM Manager",
+      "Brand Director",
+      "Social Media Strategist",
+      "E-commerce Consultant"
+    ],
+    description: "The MBA in Digital Marketing prepares business leaders to formulate digital marketing plans, track analytics, manage SEO/SEM, and execute social campaigns."
+  },
+  {
+    code: "MBA Marketing",
+    level: "Postgraduate",
+    title: "MBA Marketing",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Consumer Behavior",
+      "Brand Management",
+      "Digital Marketing Strategy",
+      "Marketing Research & Analytics",
+      "Sales & Distribution Management",
+      "Services Marketing"
+    ],
+    careers: [
+      "Marketing Manager",
+      "Brand Strategist",
+      "Sales Director",
+      "Market Research Analyst",
+      "Digital Marketing Executive"
+    ],
+    description: "The MBA in Marketing focuses on marketing strategies, brand positioning, consumer psychology, and market trends analysis to drive business growth."
+  },
+  {
+    code: "MBA Analytics & Data Science",
+    level: "Postgraduate",
+    title: "MBA Analytics & Data Science",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Data Mining & Warehousing",
+      "Predictive Modelling & Statistics",
+      "Machine Learning Applications",
+      "Data Visualization & Storytelling",
+      "Big Data Analytics & Systems",
+      "Marketing & Financial Analytics"
+    ],
+    careers: [
+      "Business Analytics Manager",
+      "Data Scientist Manager",
+      "BI Architect",
+      "Corporate Strategist",
+      "Analytics Specialist"
+    ],
+    description: "The MBA in Analytics & Data Science prepares managers to analyze complex business datasets, apply ML models, and use predictive analysis for corporate steering."
+  },
+  {
+    code: "MBA IT & FinTech",
+    level: "Postgraduate",
+    title: "MBA IT & FinTech",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "IT Infrastructure & Strategy",
+      "FinTech Ecosystem & Innovations",
+      "Blockchain & Smart Contracts",
+      "Digital Currencies & Payments",
+      "FinTech Security & Cyber Risk",
+      "Robotic Process Automation (RPA) in Finance"
+    ],
+    careers: [
+      "FinTech Product Manager",
+      "Blockchain Consultant",
+      "Financial Systems Manager",
+      "Risk Compliance Director",
+      "RPA Specialist"
+    ],
+    description: "The MBA in IT & FinTech program focuses on technology strategy, crypto blockchain applications, smart contracts, automation systems, and transaction security."
+  },
+  {
+    code: "MBA Operations Management",
+    level: "Postgraduate",
+    title: "MBA Operations Management",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Operations Strategy",
+      "Supply Chain & Logistics Management",
+      "Quality Management & Six Sigma",
+      "Inventory & Warehouse Management",
+      "Project Management",
+      "Operations Research"
+    ],
+    careers: [
+      "Operations Manager",
+      "Supply Chain Analyst",
+      "Logistics Director",
+      "Procurement Specialist",
+      "Plant Manager"
+    ],
+    description: "The MBA in Operations Management focuses on maximizing efficiency in production, logistics, warehousing, quality control systems, and inventory management."
+  },
+  {
+    code: "MBA International Business",
+    level: "Postgraduate",
+    title: "MBA International Business",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Management",
+    syllabus: [
+      "Global Business Environment",
+      "International Marketing Management",
+      "Multinational Finance Systems",
+      "Cross-Cultural Management",
+      "Global Supply Chain Logistics",
+      "Export Import Documentation"
+    ],
+    careers: [
+      "International Business Manager",
+      "Global Trade Analyst",
+      "Export Consultant",
+      "Multinational Sales Manager",
+      "Global Logistics Director"
+    ],
+    description: "The MBA in International Business covers global trade structures, cross-cultural dynamics, multinational financial management, and international market development."
+  },
+  {
+    code: "MCA AI & ML",
+    level: "Postgraduate",
+    title: "MCA AI & ML",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Introduction to Artificial Intelligence",
+      "Machine Learning Algorithms",
+      "Deep Learning & Neural Networks",
+      "Natural Language Processing",
+      "Computer Vision Systems",
+      "AI Project Architectures"
+    ],
+    careers: [
+      "AI Engineer",
+      "Machine Learning Architect",
+      "NLP Engineer",
+      "Computer Vision Specialist",
+      "Research Scientist Assistant"
+    ],
+    description: "The MCA in AI & ML program provides extensive training in artificial intelligence, neural networks, machine learning algorithms, computer vision, and NLP frameworks."
+  },
+  {
+    code: "MCA AI & Data Science",
+    level: "Postgraduate",
+    title: "MCA AI & Data Science",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Data Science with Python/R",
+      "AI Architectures",
+      "Statistical Analysis & Modeling",
+      "Advanced Databases & NoSQL",
+      "Big Data Frameworks (Hadoop/Spark)",
+      "Data-driven AI Applications"
+    ],
+    careers: [
+      "Data Scientist",
+      "AI Solutions Architect",
+      "Data Engineer",
+      "Business Intelligence Specialist",
+      "Data Architect"
+    ],
+    description: "The MCA in AI & Data Science program blends artificial intelligence architectures with database management, statistical analysis, and big data computing tools."
+  },
+  {
+    code: "MCA Cloud Computing",
+    level: "Postgraduate",
+    title: "MCA Cloud Computing",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Cloud Infrastructure Design",
+      "Virtualization & Containerization",
+      "AWS & Azure Enterprise Systems",
+      "Cloud Architecture Security",
+      "DevOps Automation Tools",
+      "Microservices & Serverless Computing"
+    ],
+    careers: [
+      "Cloud Architect",
+      "Cloud Engineer Specialist",
+      "DevOps Engineer",
+      "Cloud Security Consultant",
+      "Systems Architect"
+    ],
+    description: "The MCA in Cloud Computing covers serverless computing, virtualization setups, enterprise cloud architectures, and DevOps automation pipelines."
+  },
+  {
+    code: "MCA Cyber Security",
+    level: "Postgraduate",
+    title: "MCA Cyber Security",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Advanced Cryptography Systems",
+      "Network Penetration Testing",
+      "Incident Response & Cyber Forensics",
+      "Ethical Hacking Protocols",
+      "Information Security Governance",
+      "Application Security Audits"
+    ],
+    careers: [
+      "Cyber Security Specialist",
+      "Penetration Tester",
+      "Security Consultant",
+      "Incident Response Lead",
+      "Chief Information Security Officer Assistant"
+    ],
+    description: "The MCA in Cyber Security covers cryptographic algorithms, penetration testing, information security systems, and digital forensics methodologies."
+  },
+  {
+    code: "MCA Comprehensive Emerging Technology",
+    level: "Postgraduate",
+    title: "MCA Comprehensive Emerging Technology",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Computer Science",
+    syllabus: [
+      "Internet of Things (IoT) Systems",
+      "Blockchain Technology Architectures",
+      "Edge & Quantum Computing Basics",
+      "AR / VR System Foundations",
+      "Cyber-Physical System Security",
+      "Emerging Tech Project Incubation"
+    ],
+    careers: [
+      "Emerging Tech Consultant",
+      "IoT Solutions Architect",
+      "Blockchain Developer",
+      "R&D Engineer Trainee",
+      "Tech Innovation Manager"
+    ],
+    description: "The MCA in Comprehensive Emerging Technology explores edge computing, blockchain infrastructures, IoT architectures, and interactive AR/VR systems."
+  },
+  {
+    code: "MA JMC",
+    level: "Postgraduate",
+    title: "MA JMC",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Arts & Humanities",
+    syllabus: [
+      "Principles of Journalism",
+      "Media Theory & Society",
+      "Digital Reporting & Editing",
+      "Advertising & Public Relations",
+      "Broadcast Media Production",
+      "Media Laws & Ethics"
+    ],
+    careers: [
+      "Journalist / Reporter",
+      "Media Relations Specialist",
+      "Public Relations Officer",
+      "Content Editor",
+      "Broadcaster"
+    ],
+    description: "The Master of Arts in Journalism and Mass Communication (MA JMC) focuses on media reporting, public relations, digital broadcast production, and media ethics."
+  },
+  {
+    code: "MA Economics",
+    level: "Postgraduate",
+    title: "MA Economics",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Commerce",
+    syllabus: [
+      "Microeconomic Analysis",
+      "Macroeconomic Analysis",
+      "Econometrics & Forecasting",
+      "International Trade & Finance",
+      "Public Economics & Policy",
+      "Economic Growth & Development"
+    ],
+    careers: [
+      "Economic Policy Analyst",
+      "Econometric Analyst",
+      "Investment Consultant",
+      "Financial Analyst",
+      "Economic Researcher"
+    ],
+    description: "The MA Economics program delivers advanced training in microeconomic analysis, macro policies, econometrics, and public policy formulation."
+  },
+  {
+    code: "MCom",
+    level: "Postgraduate",
+    title: "MCom",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Commerce",
+    syllabus: [
+      "Advanced Corporate Accounting",
+      "Strategic Financial Management",
+      "Direct & Indirect Taxation",
+      "Business Policy & Strategic Analysis",
+      "Corporate Governance & Ethics",
+      "Research Methodology in Commerce"
+    ],
+    careers: [
+      "Auditor Associate",
+      "Tax Consultant",
+      "Financial Account Executive",
+      "Investment Analyst",
+      "Corporate Planner"
+    ],
+    description: "The Master of Commerce (MCom) program offers deep corporate accounting training, strategic finance operations, taxation laws, and research practices."
+  },
+  {
+    code: "MSc Mathematics",
+    level: "Postgraduate",
+    title: "MSc Mathematics",
+    university: "Manipal University Jaipur",
+    accreditation: "NAAC A+",
+    duration: "2 Years",
+    semesters: "4 Semesters",
+    fee: "N/A",
+    emi: "N/A",
+    featured: false,
+    category: "Science",
+    syllabus: [
+      "Real & Complex Analysis",
+      "Abstract & Linear Algebra",
+      "Topology & Differential Geometry",
+      "Probability & Mathematical Statistics",
+      "Numerical Analysis & Computing",
+      "Functional Analysis"
+    ],
+    careers: [
+      "Statistical Analyst",
+      "Actuarial Associate",
+      "Quantitative Risk Analyst",
+      "Mathematics Teacher/Lecturer",
+      "Data Analyst Associate"
+    ],
+    description: "The MSc Mathematics program provides advanced mathematical instruction in real/complex analysis, algebra, probability models, and numeric computation."
   }
 ];

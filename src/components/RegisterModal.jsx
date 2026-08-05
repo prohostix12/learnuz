@@ -330,7 +330,7 @@ export default function RegisterModal({ isOpen, onClose, selectedCourse }) {
                   >
                     {filteredPrograms.length > 0 ? (
                       filteredPrograms.map((prog) => (
-                        <option key={prog._id || prog.code || prog.title} value={prog.title}>
+                        <option key={prog._id || `${prog.code}-${prog.university}-${prog.title}`} value={prog.title}>
                           {prog.title} {prog.university ? `(${prog.university})` : ''}
                         </option>
                       ))
