@@ -45,6 +45,7 @@ function ProgramsContent() {
   const [programsData, setProgramsData] = useState([]);
   const [universities, setUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const searchParams = useSearchParams();
 
@@ -58,6 +59,10 @@ function ProgramsContent() {
       setSearchQuery(searchParam);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [activeCategory, searchQuery]);
 
   useEffect(() => {
     async function loadData() {
@@ -199,7 +204,7 @@ function ProgramsContent() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPrograms.map((program) => (
+            {filteredPrograms.slice(0, visibleCount).map((program) => (
               <div
                 key={program._id}
                 className="bg-white rounded-[2.2rem] border border-slate-100/70 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
@@ -306,6 +311,18 @@ function ProgramsContent() {
 
               </div>
             ))}
+          </div>
+        )}
+
+        {filteredPrograms.length > visibleCount && (
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={() => setVisibleCount(filteredPrograms.length)}
+              className="group flex items-center gap-3 bg-gradient-to-r from-blue-600 via-indigo-650 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer text-xs sm:text-sm uppercase tracking-wider"
+            >
+              <span>Explore More Programs</span>
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
         )}
       </main>
