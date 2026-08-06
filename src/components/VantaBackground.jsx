@@ -36,18 +36,18 @@ export default function VantaBackground() {
         try {
           const effect = window.VANTA.NET({
             el: containerRef.current,
-            mouseControls: true,
-            touchControls: true,
+            mouseControls: false,
+            touchControls: false,
             gyroControls: false,
             minHeight: 200.00,
             minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
+            scale: 2.00,
+            scaleMobile: 2.00,
             backgroundColor: 0xf8fafc, // Clean slate white light-mode background color
             color: 0x03ae92, // Gorgeous green-blue network connection lines/dots
-            points: 10.00, // Reduced from 12 to optimize performance
-            maxDistance: 20.00, // Reduced from 22 to optimize performance
-            spacing: 18.00, // Increased spacing to render fewer nodes and lines
+            points: 8.00, // Reduced further to optimize performance
+            maxDistance: 18.00, // Reduced to optimize performance
+            spacing: 20.00, // Increased spacing to render fewer nodes and lines
             showDots: true
           });
           vantaEffectRef.current = effect;

@@ -81,10 +81,12 @@
 /* Glassmorphism Styles matching uploaded UI mockup */
 .glass-pill-nav {
   background: rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .glass-pill-active {
@@ -95,17 +97,21 @@
 
 .glass-search-box {
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .glass-tag-pill {
   background: rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.6);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Smooth Curved Gradient Overlay behind Student */
@@ -115,17 +121,22 @@
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(226, 232, 240, 0.3);
   box-shadow: 0 10px 30px -10px rgba(31, 63, 122, 0.08);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .glass-card-blue {
   background: linear-gradient(135deg, rgba(240, 244, 251, 0.3) 0%, rgba(220, 229, 244, 0.25) 100%);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(189, 206, 233, 0.3);
   box-shadow: 0 12px 30px -8px rgba(31, 63, 122, 0.12);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Override literal color utilities to map to our new Metallic Black theme color */

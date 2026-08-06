@@ -37,12 +37,37 @@ export default function AnimatedHeading({
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isOutOfView, setIsOutOfView] = useState(false);
+  const headingRef = React.useRef(null);
 
   const currentHeading = headings[headingIndex];
   const fullText = currentHeading.lines.join('\n');
 
+  // Pause typing animation when element goes out of view (e.g. user scrolls down)
   useEffect(() => {
-    if (isPaused) return;
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsOutOfView(!entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    const currentHeadingRef = headingRef.current;
+    if (currentHeadingRef) {
+      observer.observe(currentHeadingRef);
+    }
+
+    return () => {
+      if (currentHeadingRef) {
+        observer.unobserve(currentHeadingRef);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || isOutOfView) return;
 
     if (!isDeleting && charIndex < fullText.length) {
       // Mounting phase: add letter by letter
@@ -67,7 +92,7 @@ export default function AnimatedHeading({
       setIsDeleting(false);
       setHeadingIndex((prev) => (prev + 1) % headings.length);
     }
-  }, [charIndex, isDeleting, isPaused, fullText, typeSpeed, deleteSpeed, delayBetween, headings.length]);
+  }, [charIndex, isDeleting, isPaused, isOutOfView, fullText, typeSpeed, deleteSpeed, delayBetween, headings.length]);
 
   const handleReplay = () => {
     setIsDeleting(true);
@@ -78,6 +103,11 @@ export default function AnimatedHeading({
   const renderLineWords = (fullLineText, visibleCount, highlightText, linePrefix) => {
     const words = fullLineText.split(' ');
     let runningCharCount = 0;
+    
+    // Hoist highlight check outside word loop to avoid redundant operations
+    const isHighlighted = highlightText && fullLineText.includes(highlightText);
+    const highlightStart = isHighlighted ? fullLineText.indexOf(highlightText) : -1;
+    const highlightEnd = isHighlighted ? highlightStart + highlightText.length : -1;
 
     return words.map((word, wordIdx) => {
       const wordStart = runningCharCount;
@@ -89,10 +119,6 @@ export default function AnimatedHeading({
       if (numVisibleCharsInWord <= 0) return null;
 
       const visibleSubWord = word.slice(0, numVisibleCharsInWord);
-
-      const isHighlighted = highlightText && fullLineText.includes(highlightText);
-      const highlightStart = isHighlighted ? fullLineText.indexOf(highlightText) : -1;
-      const highlightEnd = isHighlighted ? highlightStart + highlightText.length : -1;
 
       return (
         <span 
@@ -139,6 +165,7 @@ export default function AnimatedHeading({
         ensures the 3-line hero section layout is 100% stable and reserved at all times!
       */}
       <h1 
+        ref={headingRef}
         className="text-2xl sm:text-4xl lg:text-[2.8rem] xl:text-[3.1rem] font-extrabold text-[#06122d] leading-[1.18] tracking-tight uppercase h-[9.8rem] sm:h-[11.2rem] lg:h-[12.8rem] xl:h-[13.8rem] flex flex-col justify-start select-none overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
