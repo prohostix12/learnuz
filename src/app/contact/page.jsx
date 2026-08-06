@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, 
@@ -23,6 +23,34 @@ import RegisterModal from '../../components/RegisterModal';
 export default function ContactPage() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const [contactDetails, setContactDetails] = useState({
+    phone: '+91 98765 43210',
+    phoneLabel: 'Call Us',
+    phoneDesc: 'Direct connect to student support team',
+    email: 'support@learnuz.com',
+    emailLabel: 'Email Us',
+    emailDesc: '2-4 hour response time for active tickets',
+    hqTitle: 'Kochi, Kerala',
+    hqAddress: 'Learnuz Hub, Ground Floor, Infopark Phase 1, Kakkanad, Kochi, Kerala, India - 682030',
+    workingHours: 'Mon - Sat: 9AM - 6PM IST',
+    workingHoursDesc: 'Emergency support desk available on Sunday'
+  });
+
+  useEffect(() => {
+    const fetchContactDetails = async () => {
+      try {
+        const res = await fetch('/api/contact-details');
+        if (res.ok) {
+          const data = await res.json();
+          setContactDetails(data);
+        }
+      } catch (err) {
+        console.error('Error fetching contact details:', err);
+      }
+    };
+    fetchContactDetails();
+  }, []);
   
   const [formData, setFormData] = useState({
     fullName: '',
@@ -167,32 +195,32 @@ export default function ContactPage() {
               {/* Call Card */}
               <motion.a 
                 variants={itemVariants}
-                href="tel:+919876543210"
+                href={`tel:${contactDetails.phone ? contactDetails.phone.replace(/[^+\d]/g, '') : ''}`}
                 className="flex items-start gap-4 p-5 rounded-2xl glass-card-blue hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shrink-0 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Call Us</span>
-                  <h4 className="text-base font-bold text-slate-800 mt-0.5">+91 98765 43210</h4>
-                  <p className="text-xs text-slate-500 mt-1">Direct connect to student support team</p>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{contactDetails.phoneLabel || 'Call Us'}</span>
+                  <h4 className="text-base font-bold text-slate-800 mt-0.5">{contactDetails.phone}</h4>
+                  {contactDetails.phoneDesc && <p className="text-xs text-slate-500 mt-1">{contactDetails.phoneDesc}</p>}
                 </div>
               </motion.a>
 
               {/* Email Card */}
               <motion.a 
                 variants={itemVariants}
-                href="mailto:support@learnuz.com"
+                href={`mailto:${contactDetails.email}`}
                 className="flex items-start gap-4 p-5 rounded-2xl glass-card-blue hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shrink-0 shadow-sm">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Us</span>
-                  <h4 className="text-base font-bold text-slate-800 mt-0.5">support@learnuz.com</h4>
-                  <p className="text-xs text-slate-500 mt-1">2-4 hour response time for active tickets</p>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{contactDetails.emailLabel || 'Email Us'}</span>
+                  <h4 className="text-base font-bold text-slate-800 mt-0.5">{contactDetails.email}</h4>
+                  {contactDetails.emailDesc && <p className="text-xs text-slate-500 mt-1">{contactDetails.emailDesc}</p>}
                 </div>
               </motion.a>
 
@@ -206,10 +234,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Headquarters</span>
-                  <h4 className="text-base font-bold text-slate-800 mt-0.5">Kochi, Kerala</h4>
-                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                    Learnuz Hub, Ground Floor, Infopark Phase 1, Kakkanad, Kochi, Kerala, India - 682030
-                  </p>
+                  <h4 className="text-base font-bold text-slate-800 mt-0.5">{contactDetails.hqTitle}</h4>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">{contactDetails.hqAddress}</p>
                 </div>
               </motion.div>
 
@@ -223,8 +249,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Working Hours</span>
-                  <h4 className="text-base font-bold text-slate-800 mt-0.5">Mon - Sat: 9AM - 6PM IST</h4>
-                  <p className="text-xs text-slate-500 mt-1">Emergency support desk available on Sunday</p>
+                  <h4 className="text-base font-bold text-slate-800 mt-0.5">{contactDetails.workingHours}</h4>
+                  {contactDetails.workingHoursDesc && <p className="text-xs text-slate-500 mt-1">{contactDetails.workingHoursDesc}</p>}
                 </div>
               </motion.div>
              

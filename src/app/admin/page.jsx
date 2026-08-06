@@ -53,6 +53,21 @@ export default function AdminDashboard() {
   const [registrations, setRegistrations] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [testimonialSearch, setTestimonialSearch] = useState('');
+  
+  // Contact details settings states
+  const [contactDetails, setContactDetails] = useState({
+    phone: '',
+    phoneLabel: 'Call Us',
+    phoneDesc: '',
+    email: '',
+    emailLabel: 'Email Us',
+    emailDesc: '',
+    hqTitle: '',
+    hqAddress: '',
+    workingHours: '',
+    workingHoursDesc: ''
+  });
+  const [detailsSaving, setDetailsSaving] = useState(false);
   const [testimonialModalOpen, setTestimonialModalOpen] = useState(false);
   const [editTestimonialTarget, setEditTestimonialTarget] = useState(null);
   const [testimonialForm, setTestimonialForm] = useState({
@@ -124,12 +139,13 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [uniRes, progRes, contactRes, regRes, testRes] = await Promise.all([
+      const [uniRes, progRes, contactRes, regRes, testRes, detailsRes] = await Promise.all([
         fetch('/api/universities'),
         fetch('/api/programs'),
         fetch('/api/contacts'),
         fetch('/api/registrations'),
-        fetch('/api/testimonials')
+        fetch('/api/testimonials'),
+        fetch('/api/contact-details')
       ]);
 
       if (uniRes.ok) setUniversities(await uniRes.json());
@@ -137,6 +153,7 @@ export default function AdminDashboard() {
       if (contactRes.ok) setContacts(await contactRes.json());
       if (regRes.ok) setRegistrations(await regRes.json());
       if (testRes.ok) setTestimonials(await testRes.json());
+      if (detailsRes.ok) setContactDetails(await detailsRes.json());
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -516,6 +533,30 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDetailsSubmit = async (e) => {
+    e.preventDefault();
+    setDetailsSaving(true);
+    try {
+      const res = await fetch('/api/contact-details', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactDetails)
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setContactDetails(updated);
+        alert('Contact details updated successfully!');
+      } else {
+        alert('Failed to save contact details');
+      }
+    } catch (error) {
+      console.error('Error saving contact details:', error);
+      alert('An error occurred');
+    } finally {
+      setDetailsSaving(false);
+    }
+  };
+
   const newContactsCount = contacts.filter(c => c.status === 'new').length;
   
   if (authChecking || !isAuthenticated) {
@@ -625,13 +666,14 @@ export default function AdminDashboard() {
 
         {/* Tab switcher navigation */}
         <div className="flex border-b border-slate-200 mb-8 bg-white p-1.5 rounded-2xl shadow-sm border overflow-x-auto" data-lenis-prevent>
-          {['overview', 'universities', 'programs', 'leads', 'testimonials'].map((tab) => {
+          {['overview', 'universities', 'programs', 'leads', 'testimonials', 'contact-details'].map((tab) => {
             const labelMap = {
               overview: 'Overview',
               universities: 'Universities',
               programs: 'Programs',
               leads: 'Leads & Inquiries',
-              testimonials: 'Testimonials'
+              testimonials: 'Testimonials',
+              'contact-details': 'Contact Details'
             };
             const isActive = activeTab === tab;
             return (
@@ -1188,6 +1230,162 @@ export default function AdminDashboard() {
                     </table>
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* CONTACT DETAILS TAB */}
+            {activeTab === 'contact-details' && (
+              <div className="bg-white rounded-3xl border border-slate-200/60 shadow-sm p-6 space-y-6 animate-fadeIn">
+                <div className="pb-4 border-b border-slate-100 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-extrabold text-lg text-slate-900 flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-indigo-500" />
+                      <span>Company Contact Settings</span>
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Configure company's contact numbers, email, headquarters address, and hours shown on the public site.</p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleDetailsSubmit} className="space-y-6 max-w-4xl">
+                  {/* Phone Section */}
+                  <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-200/60 space-y-4">
+                    <h4 className="font-bold text-sm text-slate-800 border-b border-slate-150 pb-2">Phone Call Details</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Phone Number</label>
+                        <input
+                          type="text" required
+                          value={contactDetails.phone}
+                          onChange={(e) => setContactDetails({ ...contactDetails, phone: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. +91 98765 43210"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Label</label>
+                        <input
+                          type="text" required
+                          value={contactDetails.phoneLabel}
+                          onChange={(e) => setContactDetails({ ...contactDetails, phoneLabel: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Call Us"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Description</label>
+                        <input
+                          type="text"
+                          value={contactDetails.phoneDesc || ''}
+                          onChange={(e) => setContactDetails({ ...contactDetails, phoneDesc: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Direct connect to support"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Email Section */}
+                  <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-200/60 space-y-4">
+                    <h4 className="font-bold text-sm text-slate-800 border-b border-slate-150 pb-2">Email Details</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Email Address</label>
+                        <input
+                          type="email" required
+                          value={contactDetails.email}
+                          onChange={(e) => setContactDetails({ ...contactDetails, email: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. support@learnuz.com"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Label</label>
+                        <input
+                          type="text" required
+                          value={contactDetails.emailLabel}
+                          onChange={(e) => setContactDetails({ ...contactDetails, emailLabel: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Email Us"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Description</label>
+                        <input
+                          type="text"
+                          value={contactDetails.emailDesc || ''}
+                          onChange={(e) => setContactDetails({ ...contactDetails, emailDesc: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Response in 2-4 hours"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Headquarters Section */}
+                  <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-200/60 space-y-4">
+                    <h4 className="font-bold text-sm text-slate-800 border-b border-slate-150 pb-2">Headquarters Details</h4>
+                    <div className="grid grid-cols-1 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">City / State / Location Title</label>
+                        <input
+                          type="text" required
+                          value={contactDetails.hqTitle}
+                          onChange={(e) => setContactDetails({ ...contactDetails, hqTitle: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Kochi, Kerala"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Full Headquarters Address</label>
+                        <textarea
+                          required rows="3"
+                          value={contactDetails.hqAddress}
+                          onChange={(e) => setContactDetails({ ...contactDetails, hqAddress: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white resize-none"
+                          placeholder="Enter complete office address..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Working Hours Section */}
+                  <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-200/60 space-y-4">
+                    <h4 className="font-bold text-sm text-slate-800 border-b border-slate-150 pb-2">Working Hours</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Working Days & Timing</label>
+                        <input
+                          type="text" required
+                          value={contactDetails.workingHours}
+                          onChange={(e) => setContactDetails({ ...contactDetails, workingHours: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Mon - Sat: 9AM - 6PM IST"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Description / Off-day Note</label>
+                        <input
+                          type="text"
+                          value={contactDetails.workingHoursDesc || ''}
+                          onChange={(e) => setContactDetails({ ...contactDetails, workingHoursDesc: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500 bg-white"
+                          placeholder="e.g. Emergency support available on Sunday"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
+                    <button
+                      type="submit"
+                      disabled={detailsSaving}
+                      className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase flex items-center gap-2 cursor-pointer transition-all active:scale-95 shadow-md shadow-slate-900/10"
+                    >
+                      {detailsSaving && <span className="w-3.5 h-3.5 rounded-full border-2 border-slate-500 border-t-white animate-spin"></span>}
+                      <span>Save Changes</span>
+                    </button>
+                  </div>
+                </form>
               </div>
             )}
 
